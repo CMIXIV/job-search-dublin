@@ -1,15 +1,16 @@
 # Job Search Agent
 
-A Claude skill for running a job search after redundancy — from "my role is
-affected" to a signed offer.
+A skill for running an end-to-end job search — from a standing start to a signed
+offer.
 
-Built by and for a group of colleagues going through a collective redundancy in
-Dublin. It encodes what actually worked: interviewing people for the strengths
-their CVs undersell, challenging target job titles against real evidence, one
-master CV tailored per role, a source stack that is measured rather than assumed,
-and a tracker that records where every application came from.
+Built by and for people job-hunting in Dublin's tech sphere, but it works for
+any city or industry. It encodes what actually worked: interviewing people for
+the strengths their CVs undersell, challenging target job titles against real
+evidence, one master CV tailored per role, a source stack that is measured
+rather than assumed, and a tracker that records where every application came
+from.
 
-It is free, it runs inside your own Claude session, and none of your data leaves
+It is free, it runs inside your own agent session, and none of your data leaves
 your machine.
 
 ## What it does
@@ -19,7 +20,7 @@ your machine.
    numbers. Never invents one.
 2. **Priorities** — runway in months, employment type, visa, location, comp floor,
    and target titles. Then challenges the titles against your evidence, in both
-   directions — most people aim too low after a redundancy, some aim too high.
+   directions — most people aim too low, some aim too high.
 3. **Master CV** — one source of truth, ATS-verified by extracting the text back
    out of the rendered file, then cut down per role in minutes.
 4. **Sources** — LinkedIn, your local tech job board, `my.greenhouse.io`, and
@@ -33,8 +34,8 @@ your machine.
 7. **Score, apply, follow up** — a 1–10 fit score with honest downgrades, cover
    notes, referral messages, follow-up clocks, and rejection-stage analysis.
 
-Plus an **Ireland module**: statutory redundancy, minimum notice, collective
-consultation, tax on the ex-gratia portion, Jobseeker's Pay-Related Benefit, and
+Plus an **Ireland module**: statutory entitlements, minimum notice, collective
+consultation, tax on termination payments, Jobseeker's Pay-Related Benefit, and
 what employment permit holders need to do first.
 
 ## Install
@@ -50,12 +51,33 @@ what employment permit holders need to do first.
 **claude.ai** — Settings → Capabilities → Skills → Upload, using the
 `job-search-agent.skill` file (it is a zip).
 
+**Codex CLI** — clone the repo, then either reference it from your project's
+`AGENTS.md` (e.g. "read `job-search-agent/SKILL.md` and follow it") or install
+it as a custom prompt so it is available as a slash command:
+
+    git clone https://github.com/<your-org>/job-search-agent.git \
+      ~/.codex/prompts/job-search-agent
+
+**Hermes (via Ollama or any local runner)** — Hermes has no built-in skills
+mechanism, so load `SKILL.md` and the files under `references/` as the system
+prompt. With a `Modelfile`:
+
+    FROM hermes3
+    SYSTEM """
+    <paste the contents of SKILL.md and references/*.md here>
+    """
+
+then `ollama create job-search-agent -f Modelfile` and run
+`ollama run job-search-agent`. Any other agent that can read files and follow
+a system prompt works the same way — point it at this repo and have it read
+`SKILL.md` first.
+
 Then just say what you need:
 
-> I've been made redundant. Help me start a job search.
+> Help me start a job search.
 > Is this role worth applying to? [paste the job description]
 > Tailor my CV to this spec.
-> What am I actually entitled to?
+> What am I actually entitled to if I leave this job?
 
 ## What it creates
 
@@ -123,8 +145,8 @@ number here. This is orientation, not legal, tax or financial advice.
 
 ## Contributing
 
-Non-Irish equivalents of the redundancy module, local job-board coverage for other
-cities, and better fit-scoring weights are all welcome. One rule: **no personal
-data in examples, issues or pull requests.**
+Non-Irish equivalents of the entitlements module, local job-board coverage for
+other cities, and better fit-scoring weights are all welcome. One rule: **no
+personal data in examples, issues or pull requests.**
 
 MIT licensed. Use it, fork it, pass it on to whoever needs it next.
