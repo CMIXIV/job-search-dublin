@@ -40,7 +40,7 @@ what employment permit holders need to do first.
 
 ## Install
 
-**Claude Desktop (Cowork)** — download `job-search-agent.skill` from
+**Claude Desktop (Cowork)** — download `job-search-agent.zip` from
 [Releases](../../releases), drag it into a chat, click **Save skill**.
 
 **Claude Code**
@@ -49,7 +49,7 @@ what employment permit holders need to do first.
       ~/.claude/skills/job-search-agent
 
 **claude.ai** — Settings → Capabilities → Skills → Upload, using the
-`job-search-agent.skill` file (it is a zip).
+`job-search-agent.zip` file from [Releases](../../releases).
 
 **Codex CLI** — clone the repo, then either reference it from your project's
 `AGENTS.md` (e.g. "read `job-search-agent/SKILL.md` and follow it") or install
