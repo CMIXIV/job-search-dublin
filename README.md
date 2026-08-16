@@ -1,2 +1,130 @@
-# job-search-dublin
-Helps find a job in Dublin for people in tech who are under pressure
+# Job Search Agent
+
+A Claude skill for running a job search after redundancy — from "my role is
+affected" to a signed offer.
+
+Built by and for a group of colleagues going through a collective redundancy in
+Dublin. It encodes what actually worked: interviewing people for the strengths
+their CVs undersell, challenging target job titles against real evidence, one
+master CV tailored per role, a source stack that is measured rather than assumed,
+and a tracker that records where every application came from.
+
+It is free, it runs inside your own Claude session, and none of your data leaves
+your machine.
+
+## What it does
+
+1. **Intake** — reads your CV and LinkedIn as *evidence, not truth*, then
+   interviews you for the achievements the documents undersell. Pushes for real
+   numbers. Never invents one.
+2. **Priorities** — runway in months, employment type, visa, location, comp floor,
+   and target titles. Then challenges the titles against your evidence, in both
+   directions — most people aim too low after a redundancy, some aim too high.
+3. **Master CV** — one source of truth, ATS-verified by extracting the text back
+   out of the rendered file, then cut down per role in minutes.
+4. **Sources** — LinkedIn, your local tech job board, `my.greenhouse.io`, and
+   per-employer alerts on Workday, Ashby and Lever. Set up with alerts so
+   discovery happens without you remembering to look.
+5. **Tracker** — Google Sheets, a local spreadsheet, Notion, Airtable — your
+   choice. Source attribution built in from row one, so you can see which source
+   is actually producing applications rather than guessing.
+6. **Cadence and autonomy** — manual, scheduled discovery, or scheduled discovery
+   with applications drafted and staged for review. You always press submit.
+7. **Score, apply, follow up** — a 1–10 fit score with honest downgrades, cover
+   notes, referral messages, follow-up clocks, and rejection-stage analysis.
+
+Plus an **Ireland module**: statutory redundancy, minimum notice, collective
+consultation, tax on the ex-gratia portion, Jobseeker's Pay-Related Benefit, and
+what employment permit holders need to do first.
+
+## Install
+
+**Claude Desktop (Cowork)** — download `job-search-agent.skill` from
+[Releases](../../releases), drag it into a chat, click **Save skill**.
+
+**Claude Code**
+
+    git clone https://github.com/<your-org>/job-search-agent.git \
+      ~/.claude/skills/job-search-agent
+
+**claude.ai** — Settings → Capabilities → Skills → Upload, using the
+`job-search-agent.skill` file (it is a zip).
+
+Then just say what you need:
+
+> I've been made redundant. Help me start a job search.
+> Is this role worth applying to? [paste the job description]
+> Tailor my CV to this spec.
+> What am I actually entitled to?
+
+## What it creates
+
+Everything lives in a `job-search/` folder inside whatever folder you connect:
+
+    job-search/
+      00-state.md            where you got to, and every decision made
+      01-profile.md          your provable claims, with the numbers
+      02-priorities.md       runway, titles, constraints
+      03-master-cv.md/.docx  source of truth + generated, ATS-checked
+      04-sources.md          configured sources and alerts
+      applications/          per role: the JD, the score, the exact CV sent
+
+## Scripts
+
+    python3 scripts/make_tracker.py --out ~/job-search
+    python3 scripts/ats_check.py ~/job-search/03-master-cv.pdf --claims claims.txt
+
+`make_tracker.py` writes an `.xlsx` with three tabs and working attribution
+formulas, plus CSVs for importing into Sheets, Notion or Airtable. Needs
+`openpyxl`, or run `--csv-only` with no dependencies.
+
+`ats_check.py` extracts the text back out of your CV the way an applicant
+tracking system would, and tells you whether your section headings, contact
+details and key claims survived — plus the structural things that break parsers:
+tables, text boxes, two-column layouts, content stranded in headers. Uses
+`pdftotext`, `pdfplumber` or `pypdf` for PDFs and `python-docx` for Word files,
+whichever is present.
+
+## Things it deliberately will not do
+
+**Auto-submit applications.** The ceiling is drafted and staged; a human presses
+submit. Applications cannot be un-sent, misconfigured filters fail in batches of
+forty rather than one, and submission was never the bottleneck — fit, tailoring
+and having someone inside are. `references/06-cadence-autonomy.md` makes the full
+argument.
+
+**Scrape LinkedIn or anything else that forbids it.** Alerts and saved searches do
+the same job, legally, and the account that gets restricted is yours.
+
+**Invent a fact about you.** Not a metric, not a date, not a team size. Unknowns
+stay in the document as `[NEEDS NUMBER]` until you supply the answer. An invented
+number is a fireable offence after you are hired.
+
+**Tell you what to accept.** On packages, offers and legal questions it lays out
+the numbers and the trade-offs. The decision is yours, and for real money you
+should talk to a solicitor.
+
+## Privacy
+
+Your CV, salary and application history stay in your folder. This repository
+contains no personal data, and `.gitignore` blocks `job-search/`, PDFs, Word files
+and spreadsheets so you cannot commit yours by accident. If you fork this to
+customise it, keep it that way.
+
+## Accuracy
+
+The Ireland figures in `references/09-ireland-redundancy.md` were verified in
+August 2026 and every one carries a source link. Statutory ceilings and welfare
+rates move with the Budget — check
+[citizensinformation.ie](https://www.citizensinformation.ie),
+[revenue.ie](https://www.revenue.ie) and
+[workplacerelations.ie](https://www.workplacerelations.ie) before relying on any
+number here. This is orientation, not legal, tax or financial advice.
+
+## Contributing
+
+Non-Irish equivalents of the redundancy module, local job-board coverage for other
+cities, and better fit-scoring weights are all welcome. One rule: **no personal
+data in examples, issues or pull requests.**
+
+MIT licensed. Use it, fork it, pass it on to whoever needs it next.

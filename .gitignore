@@ -1,0 +1,10 @@
+# Never commit anyone's job search data.
+job-search/
+*.pdf
+*.docx
+*.xlsx
+!templates/*.docx
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
