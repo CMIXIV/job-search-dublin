@@ -1,0 +1,49 @@
+name: Build and publish skill bundle
+
+# Builds the bundle from the repository contents and attaches it to a release.
+# Uploading through the API avoids the browser upload form, which rejects
+# unfamiliar file extensions like .skill.
+#
+# To publish:  git tag v1.0.0 && git push origin v1.0.0
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build bundle
+        run: bash scripts/build_bundle.sh
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/job-search-agent.skill
+            dist/job-search-agent.zip
+          generate_release_notes: true
+          body: |
+            ## Install
+
+            **Claude Desktop (Cowork)** — download `job-search-agent.skill`
+            below, drag it into a chat, click **Save skill**.
+
+            **claude.ai** — Settings → Capabilities → Skills → Upload, using
+            `job-search-agent.zip`.
+
+            **Claude Code**
+
+            ```
+            git clone https://github.com/CMIXIV/job-search-dublin.git \
+              ~/.claude/skills/job-search-agent
+            ```
+
+            Both files are the same archive; only the extension differs.

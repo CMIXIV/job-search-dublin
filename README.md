@@ -40,22 +40,33 @@ what employment permit holders need to do first.
 
 ## Install
 
-**Claude Desktop (Cowork)** — download `job-search-agent.zip` from
-[Releases](../../releases), drag it into a chat, click **Save skill**.
+Every route below installs the same thing: a folder named `job-search-agent`
+containing `SKILL.md`. Pick whichever suits your tool.
+
+**Claude Desktop (Cowork)** — open
+[`dist/job-search-agent.skill`](https://github.com/CMIXIV/job-search-dublin/blob/main/dist/job-search-agent.skill)
+and click **Download raw file** (the download icon at the top right of the file
+view). Clicking the filename alone opens a web page instead of downloading the
+file — that is the most common reason this step fails. Then drag the downloaded
+`.skill` file into a chat and click **Save skill**.
+
+The same file is attached to each
+[Release](https://github.com/CMIXIV/job-search-dublin/releases) if you prefer.
+
+**claude.ai** — Settings → Capabilities → Skills → Upload, using
+[`dist/job-search-agent.zip`](https://github.com/CMIXIV/job-search-dublin/blob/main/dist/job-search-agent.zip).
+Identical archive to the `.skill`; that form only accepts a `.zip`.
 
 **Claude Code**
 
-    git clone https://github.com/<your-org>/job-search-agent.git \
+    git clone https://github.com/CMIXIV/job-search-dublin.git \
       ~/.claude/skills/job-search-agent
-
-**claude.ai** — Settings → Capabilities → Skills → Upload, using the
-`job-search-agent.zip` file from [Releases](../../releases).
 
 **Codex CLI** — clone the repo, then either reference it from your project's
 `AGENTS.md` (e.g. "read `job-search-agent/SKILL.md` and follow it") or install
 it as a custom prompt so it is available as a slash command:
 
-    git clone https://github.com/<your-org>/job-search-agent.git \
+    git clone https://github.com/CMIXIV/job-search-dublin.git \
       ~/.codex/prompts/job-search-agent
 
 **Hermes (via Ollama or any local runner)** — Hermes has no built-in skills
@@ -78,6 +89,28 @@ Then just say what you need:
 > Is this role worth applying to? [paste the job description]
 > Tailor my CV to this spec.
 > What am I actually entitled to if I leave this job?
+
+### If something goes wrong
+
+**The Releases link 404s or the page is empty.** No release has been published
+yet, or you followed a relative link from the file view. The `dist/` links above
+do not depend on releases at all.
+
+**Cowork shows no "Save skill" button.** The download was renamed, or the `.zip`
+was used. That button only appears for a `.skill` extension — rename it back and
+drag it in again.
+
+**Your agent cannot find the repo.** The repository is `job-search-dublin`; the
+skill inside it is `job-search-agent`. They are deliberately different names.
+
+**Maintainers — after changing `SKILL.md`, `references/` or anything else:**
+
+    bash scripts/build_bundle.sh
+
+then commit the regenerated `dist/` files. The bundle is a snapshot of the repo,
+so it goes stale the moment the source changes and is not rebuilt. Publishing a
+release (`git tag v1.1.0 && git push origin v1.1.0`) rebuilds it automatically
+via `.github/workflows/release.yml`.
 
 ## What it creates
 
