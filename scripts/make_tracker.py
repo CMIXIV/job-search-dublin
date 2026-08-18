@@ -21,10 +21,23 @@ import sys
 
 APPLICATIONS = [
     "Rank", "Date found", "Source", "Company", "Role title", "Band", "Depth",
+    "Via", "Consent",
     "Location / mode", "JD link", "Posted", "Salary band",
     "Fit", "Probability", "Priority",
     "Why", "Watch", "Route", "Advocate",
     "Status", "Date applied", "Next action", "Due", "CV used", "Notes",
+]
+
+# Where a listing hides the employer, Company reads
+# "[EMPLOYER NOT DISCLOSED]" and Via names the agency. Never guess the employer -
+# two hidden listings are often the same underlying role, and a guess makes that
+# undetectable.
+CONSENT = [
+    "Direct - n/a",
+    "Asked, awaiting client name",
+    "Consent given",
+    "Consent withheld",
+    "SUBMITTED WITHOUT CONSENT",
 ]
 
 HISTORY = [
@@ -59,7 +72,8 @@ DEFAULT_SOURCES = [
 
 EXAMPLE_ROW = [
     "1", "2026-08-16", "LinkedIn", "EXAMPLE - delete this row",
-    "Senior Product Manager", "Senior", "High", "Dublin / hybrid 2d", "https://",
+    "Senior Product Manager", "Senior", "High", "", "Direct - n/a",
+    "Dublin / hybrid 2d", "https://",
     "req 12345, posted 6 days ago", "",
     "8", "6", "",
     "Core of the role is the thing I am best at, not a bolt-on",
@@ -114,28 +128,37 @@ def write_xlsx(out_dir):
     ws = wb.active
     ws.title = "Applications"
     style_header(ws, APPLICATIONS, {
-        4: 22, 5: 28, 8: 22, 9: 30, 10: 24, 15: 40, 16: 40, 17: 30, 21: 30, 24: 34})
+        4: 22, 5: 28, 8: 20, 9: 26, 10: 22, 11: 30, 12: 24,
+        17: 40, 18: 40, 19: 30, 23: 30, 26: 34})
     ws.append(EXAMPLE_ROW)
+
+    # Column letters are derived from APPLICATIONS, never hard-coded - inserting
+    # a column silently repointed every one of these the last time they were.
+    col = {name: get_column_letter(i)
+           for i, name in enumerate(APPLICATIONS, start=1)}
 
     status_dv = DataValidation(type="list", formula1='"%s"' % ",".join(STATUSES), allow_blank=True)
     depth_dv = DataValidation(type="list", formula1='"%s"' % ",".join(DEPTHS), allow_blank=True)
     band_dv = DataValidation(type="list", formula1='"%s"' % ",".join(BANDS), allow_blank=True)
     source_dv = DataValidation(type="list", formula1='"%s"' % ",".join(DEFAULT_SOURCES), allow_blank=True)
+    consent_dv = DataValidation(type="list", formula1='"%s"' % ",".join(CONSENT), allow_blank=True)
     score_dv = DataValidation(type="whole", operator="between", formula1=1, formula2=10, allow_blank=True)
-    for dv in (status_dv, band_dv, source_dv, score_dv, depth_dv):
+    for dv in (status_dv, band_dv, source_dv, score_dv, depth_dv, consent_dv):
         ws.add_data_validation(dv)
-    status_dv.add("S2:S500")
-    band_dv.add("F2:F500")
-    depth_dv.add("G2:G500")
-    source_dv.add("C2:C500")
-    score_dv.add("L2:L500")   # Fit
-    score_dv.add("M2:M500")   # Probability
+    status_dv.add(f"{col['Status']}2:{col['Status']}500")
+    band_dv.add(f"{col['Band']}2:{col['Band']}500")
+    depth_dv.add(f"{col['Depth']}2:{col['Depth']}500")
+    source_dv.add(f"{col['Source']}2:{col['Source']}500")
+    consent_dv.add(f"{col['Consent']}2:{col['Consent']}500")
+    score_dv.add(f"{col['Fit']}2:{col['Fit']}500")
+    score_dv.add(f"{col['Probability']}2:{col['Probability']}500")
 
     # Priority = Fit and Probability weighted equally. Overwrite by hand when
     # comp or title justifies an adjustment, and say so in the Why column.
+    f, pr = col["Fit"], col["Probability"]
     for r in range(2, 501):
-        ws.cell(row=r, column=14,
-                value=f'=IF(COUNT(L{r}:M{r})=2,AVERAGE(L{r}:M{r}),"")')
+        ws.cell(row=r, column=APPLICATIONS.index("Priority") + 1,
+                value=f'=IF(COUNT({f}{r}:{pr}{r})=2,AVERAGE({f}{r}:{pr}{r}),"")')
 
     ws_c = wb.create_sheet("Contacts")
     style_header(ws_c, CONTACTS, {4: 30, 9: 34})
@@ -147,14 +170,17 @@ def write_xlsx(out_dir):
     style_header(ws_s, SOURCES, {1: 28})
     for i, src in enumerate(DEFAULT_SOURCES, start=2):
         ws_s.cell(row=i, column=1, value=src)
-        ws_s.cell(row=i, column=2, value=f'=COUNTIF(Applications!$C$2:$C$500,$A{i})')
+        src_c, app_c, st_c = col["Source"], col["Date applied"], col["Status"]
+        ws_s.cell(row=i, column=2, value=(
+            f'=COUNTIF(Applications!${src_c}$2:${src_c}$500,$A{i})'))
         ws_s.cell(row=i, column=3, value=(
-            f'=COUNTIFS(Applications!$C$2:$C$500,$A{i},Applications!$T$2:$T$500,"<>")'
+            f'=COUNTIFS(Applications!${src_c}$2:${src_c}$500,$A{i},'
+            f'Applications!${app_c}$2:${app_c}$500,"<>")'
         ))
-        for col, stage in ((4, "Recruiter call"), (5, "In process"), (6, "Offer")):
-            ws_s.cell(row=i, column=col, value=(
-                f'=COUNTIFS(Applications!$C$2:$C$500,$A{i},'
-                f'Applications!$S$2:$S$500,"{stage}")'
+        for c, stage in ((4, "Recruiter call"), (5, "In process"), (6, "Offer")):
+            ws_s.cell(row=i, column=c, value=(
+                f'=COUNTIFS(Applications!${src_c}$2:${src_c}$500,$A{i},'
+                f'Applications!${st_c}$2:${st_c}$500,"{stage}")'
             ))
     note_row = len(DEFAULT_SOURCES) + 3
     ws_s.cell(row=note_row, column=1,

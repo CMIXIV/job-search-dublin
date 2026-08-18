@@ -45,7 +45,9 @@ without them degrades into a list of links within a fortnight.
 | Rank | Sort by Priority. The top of this column is the answer to "what now" |
 | Date found | Age of a posting predicts response rate |
 | **Source** | The attribution that tells you where to spend time |
-| Company / Role | |
+| Company / Role | `[EMPLOYER NOT DISCLOSED]` where a listing hides it. Never guess |
+| Via | The agency or intermediary holding the role. Blank means direct |
+| Consent | Whether they have agreed to be submitted, and to whom. See below |
 | Band | Senior / Lead / Principal / Director - reveals where they actually land |
 | Depth | High / Medium / Low - is their differentiator the core of the role |
 | Location / mode | Onsite, hybrid days, remote-within-country. Record contradictions here as a question to ask |
@@ -105,6 +107,26 @@ gap - it is how the market's response rate gets measured.
 
 **Every row has a next action and a due date, or it is closed.** Rows with
 neither are where searches go quiet.
+
+**Track where every copy of the CV has gone.** Once agencies are involved, the
+person loses sight of who holds their CV and who it has been shown to - which is
+the thing that causes duplicate-submission rejections and the CV arriving back at
+their own employer. The `Via` and `Consent` columns exist to make that visible at
+a glance:
+
+`Direct - n/a` · `Asked, awaiting client name` · `Consent given` ·
+`Consent withheld` · `SUBMITTED WITHOUT CONSENT`
+
+The last value is an incident record, not a status. It is shouty on purpose: it
+means a CV went somewhere the person did not agree to, and it is the evidence if
+a complaint follows. See `09-ireland-redundancy.md` for what to do about it.
+
+**One row per underlying role, not per route.** The same job routinely appears
+three times - the employer's own posting, an agency version with the employer
+hidden, and an aggregator copy. Three rows inflate the pipeline and hide the fact
+that two applications are competing for one seat. Merge them into one row, note
+the routes, and if a hidden listing later turns out to be a role already tracked,
+merge rather than delete so the duplication stays visible.
 
 **A link is a fact. Capture it or leave it blank.** The JD link must be the URL of
 *that specific requisition*, captured at the moment of scoring. If you do not have
