@@ -21,6 +21,8 @@ trap 'rm -rf "$STAGE"' EXIT
 mkdir -p "$STAGE/job-search-agent"
 cp -r SKILL.md README.md LICENSE references scripts templates "$STAGE/job-search-agent/"
 rm -f "$STAGE/job-search-agent/scripts/build_bundle.sh"
+find "$STAGE" \( -name '__pycache__' -o -name '.DS_Store' -o -name '*.pyc' \) \
+  -exec rm -rf {} + 2>/dev/null || true
 
 mkdir -p dist
 rm -f dist/job-search-agent.skill dist/job-search-agent.zip

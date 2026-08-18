@@ -119,6 +119,27 @@ them confirm the current position directly with the Department of Enterprise,
 Tourism and Employment immediately, and treat the deadline as the hard constraint
 in phase 2.
 
+**How the package is structured can break an immigration application.** This
+catches people and it is worth raising unprompted:
+
+- **PILON ends employment immediately.** Any permission, scheme or application
+  that requires the person to be *currently employed* fails the moment the
+  employment ends. Worked notice or garden leave keeps them employed for the full
+  notice period. Where an immigration route depends on current employment, that
+  is a second and entirely independent reason to prefer notice over PILON, and it
+  belongs in the negotiation.
+- **Continuity requirements are ambiguous.** A criterion reading "in employment
+  for six months" may mean six months of continuous employment generally, or six
+  months with the current employer. The difference can be half a year of
+  eligibility. Verify with a specialist before accepting any offer whose start
+  date sits inside the window - not afterwards.
+- **Contractor engagements are a different status.** Self-employment is accepted
+  by some routes, but switching from employment to self-employment mid-window is
+  often untested. Ask before signing.
+
+Where an immigration route is in play, everything else in the search is
+downstream of holding it. Treat it as the first constraint, not a side issue.
+
 ## Should they take the package
 
 Not your call, and say so. What you can do is lay out the comparison:
@@ -126,7 +147,9 @@ Not your call, and say so. What you can do is lay out the comparison:
 - Total value after tax, using the right relief
 - Notice treatment and whether they can earn elsewhere during it
 - Pension, health cover, unvested equity, and what happens to each
-- Any non-compete or garden leave restriction on their next role
+- Any non-compete, non-solicit or garden leave restriction on their next role -
+  read the actual clause rather than assuming, check whether the specific target
+  employers fall inside it, and have a solicitor confirm before signing anything
 - The realistic time-to-hire in their band and market, from their own tracker
   data if they have any, and from recruiters if they do not
 

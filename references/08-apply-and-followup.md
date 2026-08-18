@@ -25,6 +25,21 @@ register they would never use in a meeting.
 Never open with "I am writing to apply for". Never explain the redundancy in a
 cover note - it is neutral information for a screen conversation, not a lead.
 
+## Name the gap before they find it
+
+Every application has one thing that could sink it - a named technology never
+used, a domain never worked in, a title one step up. Write it down per role
+before applying, in the person's own words.
+
+Then the rule that matters: **do not blur adjacent experience into the thing they
+are asking for.** Something similar is not something the same, and anyone
+qualified to interview on it will spot the substitution instantly - at which
+point the whole application is suspect, not just that claim.
+
+Two honest options: close the gap before the interview, or name it plainly in the
+cover note and let them screen on it rather than discover it later. Both work.
+Blurring does not.
+
 ## Advocates - the highest-leverage move available
 
 An internal advocate changes an application from a document in a queue into a
@@ -57,17 +72,29 @@ network already knows and is inclined to help.
 Encourage an early, plain, non-self-pitying announcement to their network, and a
 direct message to the twenty people most able to help. Draft both; they send.
 
-## Follow-up
+## The chase ladder
 
-- **No response after 10-14 days** - one short follow-up to the recruiter or
-  hiring manager if a name is available. One. Then mark it and move on.
-- **After a screen** - a three-line thank-you within 24 hours, referencing
-  something specific from the conversation.
-- **After a final round** - same, plus one concrete thing they would do in the
-  first 90 days.
-- **21 days, no response** - status becomes "No response". It is data about the
-  market, not a verdict on them. Roles do get resurrected; a polite note when the
-  role is reposted is not embarrassing.
+Fixed, and it ends. Most searches leak time into applications that died weeks ago.
+
+**Day 0.** Applied, logged with the date. The follow-up clock starts here.
+
+**Day 10.** One chase, to the recruiter or hiring manager if a name is available.
+Restate interest in one line, add one new piece of evidence, ask about timelines.
+Never simply "checking in" - a chase with nothing in it is worse than silence.
+
+**Day 21.** No reply after that chase means the application alone will not land
+it. Escalate: find a referral, or approach the hiring manager directly. If
+neither is possible, the role is effectively closed.
+
+**Day 30.** Mark it Passed and reallocate the effort. A dead application left
+open inflates the pipeline and hides the need for new targets - which is how a
+search quietly stops generating leads while feeling busy.
+
+**Always: one chase, then escalate.** Never a second polite follow-up.
+
+After a screen or a final round, a short note within 24 hours referencing
+something specific from the conversation - and for a final, one concrete thing
+they would do in the first 90 days.
 
 ## Rejections
 
@@ -84,6 +111,43 @@ what to fix, and the fixes are entirely different:
 
 Ask for feedback once, politely. Most will not give it. The pattern across ten
 applications is more reliable than any single response anyway.
+
+**Cluster the rejections by what the roles had in common, not by company.** Stage
+analysis tells you where things die; attribute analysis tells you why. If every
+role that died late had a people-management component, or a domain the person has
+never worked in, or a title one step above their evidence, that is a finding - and
+it usually points at something they can prepare rather than something they lack.
+
+Reaching a third round proves the CV, the communication and general competence
+all cleared. Companies do not take weak candidates that far. A late, repeated
+failure is diagnostic rather than damning, and it is worth naming precisely.
+
+**The under-told answer.** A recurring gap is often a gap in the *story* rather
+than the experience. Someone told they lack leadership evidence may have led
+without authority for years, mentored people, or built a function from scratch -
+and simply never said so. Before concluding the experience is missing, check
+whether it is merely untold.
+
+**Close the feedback gap with an advocate.** Recruiters will not tell them why
+they lost. Someone inside who likes them will. "What would give you pause about
+me for this role?" asked of an advocate is worth more than another application.
+
+**Keep an interview history.** Every company and level where a process ended,
+permanently. Re-applying to the same company at the same level shortly after a
+rejection is low-value, and a year later nobody remembers. A past rejection at a
+higher level is also a coherent story if it comes up - "right person, wrong
+level" - but only if it is not a surprise.
+
+## Watch what actually converts
+
+Cold applications and warm routes convert at wildly different rates, and the
+tracker will show it within a few weeks. When cold screens are returning nothing
+and one warm introduction produced a hiring-manager conversation in 48 hours, the
+correct response is to stop adding cold applications and work the warm routes -
+referral submissions, replies owed, advocates not yet asked.
+
+Say this out loud when the data supports it. The instinct under pressure is to
+add volume, and volume is the thing that just failed.
 
 ## Interviews and offers
 

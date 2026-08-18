@@ -86,5 +86,21 @@ Note the synonyms that show up - they belong in the saved searches in phase 4.
 - Search intensity implied by the runway: applications per week, and what gets
   dropped if that is not being hit
 
+## Decide now what gives, before it has to
+
+Filters narrow the pipeline - that is what they are for - and a narrow pipeline
+eventually runs dry. Agree the rule while nobody is under pressure:
+
+> If the filtered list is exhausted without an offer by [date], the choice is to
+> relax depth, or relax title, or relax compensation. One of them, deliberately,
+> named at the time.
+
+Without that rule, what happens instead is drift: standards erode quietly across
+all three at once, nobody decides anything, and a month later the person is
+applying to roles they would have rejected in week one without ever having chosen
+to. Writing the trade-off down in advance turns it into a decision.
+
+Set the date from the runway. It should land with enough time left to act on it.
+
 Re-read this at every monthly review. Runway shortens; priorities that were
 optional in month one become decisions in month three.

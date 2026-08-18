@@ -86,6 +86,39 @@ Walk through this with the person, one line at a time. Tick items in
 5. Notice which sources need a login and get those created now, not at the moment
    a deadline is closing.
 
+## Record the dead ends too
+
+Negative findings save more time than positive ones, and they get re-derived
+endlessly if nobody writes them down. Keep a short list in
+`job-search/04-sources.md` of where *not* to look, with the reason and the date.
+
+The pattern that catches most people: **a large office is not the same as a
+function being decided there.** A company can employ thousands in a city and make
+none of the decisions the person wants to be part of, because that function sits
+at headquarters. The same holds for remote roles - plenty of companies hire
+engineers across a continent while keeping product, design or leadership in one
+time zone. Check whether the *function* is hired there, not whether the company
+is present.
+
+Other dead ends worth recording: sources that return nothing at the target
+seniority, employers who never reply, and search lanes (a location, a work mode,
+a title) that produced zero live roles across several weeks. A lane that is
+structurally empty is a finding, not a run of bad luck - say which one it is.
+
+## Practical gotchas
+
+- **LinkedIn job descriptions are gated.** Search result lists read fine; the
+  descriptions frequently do not. Pull the JD from the company's own board.
+- **Cross-company ATS search needs its filters set exactly.** On
+  `my.greenhouse.io` the location filter only works with the full parameter set -
+  query, location, latitude, longitude, location type and country. Passing the
+  country alone is silently ignored and returns global results, which looks like
+  a working search full of the wrong roles. Check the first few hits are actually
+  in the target location before trusting a result set.
+- **Signed-in sources persist.** Sources needing a login are worth the one-time
+  setup; the session usually lasts, and they surface roles that appear nowhere
+  else.
+
 ## Record what each source is producing
 
 Every role that enters the tracker records the source it came from. After three
