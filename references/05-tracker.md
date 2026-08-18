@@ -49,7 +49,7 @@ without them degrades into a list of links within a fortnight.
 | Band | Senior / Lead / Principal / Director - reveals where they actually land |
 | Depth | High / Medium / Low - is their differentiator the core of the role |
 | Location / mode | Onsite, hybrid days, remote-within-country. Record contradictions here as a question to ask |
-| JD link | The company-board link, not the aggregator link |
+| JD link | The req URL on the company's own board. Blank if you do not have it - see below |
 | Posted | Req ID and posting age - stalled, shortlisted, or hard to fill |
 | Salary band | Published band if there is one; blank is data too |
 | **Fit** | 1-10, maps to what they have shipped |
@@ -105,6 +105,33 @@ gap - it is how the market's response rate gets measured.
 
 **Every row has a next action and a due date, or it is closed.** Rows with
 neither are where searches go quiet.
+
+**A link is a fact. Capture it or leave it blank.** The JD link must be the URL of
+*that specific requisition*, captured at the moment of scoring. If you do not have
+it, the field stays empty or reads `[NO LINK CAPTURED]`.
+
+Three things that are not links, however much they look like one:
+
+- a search query - `linkedin.com/jobs/search?keywords=...`, `my.greenhouse.io/jobs?query=...`
+- a careers-site or board root - `jobs.ashbyhq.com/company`, `company.com/careers`
+- the URL from the row above, pasted because this row had none
+
+The third is the dangerous one. All three fail silently: they are clickable, they
+look right in the table, and they only reveal themselves when someone opens the
+row to apply and lands somewhere else. Substituting a plausible URL for a missing
+one is the same error as inventing a metric for a CV - except that nobody thinks
+of a link as a claim.
+
+**Two checks that catch it.** Run them whenever rows are added in bulk:
+
+1. **No two rows share a link.** A duplicate means one was copied from its
+   neighbour.
+2. **Every link contains a token from its own row** - the company name, or the req
+   ID. A link naming a different company than the row it sits on is wrong by
+   definition.
+
+Postings expire, so save the JD text alongside the link at capture time. A dead
+URL with the description saved is recoverable; a dead URL alone is not.
 
 **Never let the tracker become the work.** Five minutes a week of maintenance. If
 it is taking longer, columns are being tracked that no decision depends on.

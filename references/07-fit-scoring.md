@@ -136,3 +136,10 @@ each number. When a score changes, record the revision and the reason.
 
 Save the JD text to `job-search/applications/<company>-<role>/jd.md` at the time
 of scoring. Postings disappear, and interview prep needs the original.
+
+**Capture the req URL in the same moment, or record no URL at all.** Scoring is
+the only point at which you reliably have the specific posting open. A search
+query, a board root, or the previous row's URL are not links - they are guesses
+wearing a link's clothing, and they fail silently at the worst possible moment.
+Before handing over any batch of scored roles, check that no two share a URL and
+that each URL names its own company or req. See `05-tracker.md`.

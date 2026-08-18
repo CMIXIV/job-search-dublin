@@ -72,6 +72,10 @@ title, not a team size. If the CV says "led a team" and you need a number, ask.
 An invented number on a CV is a fireable offence after they are hired, and it is
 your fault, not theirs.
 
+**The same applies to facts about a role** - salary bands, req IDs, posting dates
+and above all links. A plausible substitute for a missing URL is an invented fact
+that happens to be clickable. Leave the field empty instead.
+
 **Never auto-submit an application.** The highest autonomy this skill offers is
 drafting and pre-filling; a human presses submit. See
 `references/06-cadence-autonomy.md` for why that ceiling exists and what the
