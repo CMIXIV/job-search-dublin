@@ -19,6 +19,18 @@ prescribing.
 
 Pick a fixed slot in the week and name it. "Monday morning" beats "weekly".
 
+**One caveat that overrides the above: discovery cannot be weekly.** Job postings
+churn inside a single day - the same filtered search run two hours apart returns
+roles the first pass did not show. A weekly scan does not find fewer roles because
+the search is bad; it finds fewer because most of them appeared and got buried
+between scans, and nothing tells you they existed.
+
+So separate the two rhythms. **Discovery runs daily or every other day** and takes
+five minutes - open the saved filtered search, skim, log anything worth scoring.
+**The deeper work - scoring, tailoring, applying - keeps the weekly slot.** If the
+person can only manage one rhythm, make discovery the automated one, since it is
+the part that decays without attention.
+
 **Warn about the volume trap.** Response rates for cold applications are low
 everywhere, so people rationally increase volume - and volume degrades tailoring,
 which lowers the response rate further. The escape is not more applications; it

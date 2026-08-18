@@ -31,8 +31,10 @@ your machine.
    is actually producing applications rather than guessing.
 6. **Cadence and autonomy** — manual, scheduled discovery, or scheduled discovery
    with applications drafted and staged for review. You always press submit.
-7. **Score, apply, follow up** — a 1–10 fit score with honest downgrades, cover
-   notes, referral messages, follow-up clocks, and rejection-stage analysis.
+7. **Score, apply, follow up** — separate 1–10 scores for Fit (does this match
+   what you've shipped) and Probability (honest odds of landing it), combined
+   into a Priority that orders your week. Plus cover notes, referral messages, a
+   follow-up ladder that ends, and rejection-pattern analysis.
 
 Plus an **Ireland module**: statutory entitlements, minimum notice, collective
 consultation, tax on termination payments, Jobseeker's Pay-Related Benefit, and
@@ -129,8 +131,9 @@ Everything lives in a `job-search/` folder inside whatever folder you connect:
     python3 scripts/make_tracker.py --out ~/job-search
     python3 scripts/ats_check.py ~/job-search/03-master-cv.pdf --claims claims.txt
 
-`make_tracker.py` writes an `.xlsx` with three tabs and working attribution
-formulas, plus CSVs for importing into Sheets, Notion or Airtable. Needs
+`make_tracker.py` writes an `.xlsx` with four tabs — applications, contacts,
+interview history and a source summary with working attribution formulas — plus
+CSVs for importing into Sheets, Notion or Airtable. Needs
 `openpyxl`, or run `--csv-only` with no dependencies.
 
 `ats_check.py` extracts the text back out of your CV the way an applicant

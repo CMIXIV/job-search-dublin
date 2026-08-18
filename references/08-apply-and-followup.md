@@ -92,6 +92,13 @@ search quietly stops generating leads while feeling busy.
 
 **Always: one chase, then escalate.** Never a second polite follow-up.
 
+**A repost resets the clock.** If a req the person has already applied to is
+re-promoted, reposted or re-dated, that is an observable signal worth acting on:
+the employer is still looking, and the existing application may have been missed,
+filtered out, or overtaken. It justifies one further contact that would otherwise
+have been the forbidden second follow-up - referencing the repost specifically,
+not "checking in". Worth re-checking live postings for anything still open.
+
 After a screen or a final round, a short note within 24 hours referencing
 something specific from the conversation - and for a final, one concrete thing
 they would do in the first 90 days.
@@ -148,6 +155,26 @@ referral submissions, replies owed, advocates not yet asked.
 
 Say this out loud when the data supports it. The instinct under pressure is to
 add volume, and volume is the thing that just failed.
+
+**When a week's roles are all cold-capped** (see `07-fit-scoring.md`), the finding
+is about the search, not the roles. The productive response is to spend that
+week's hours on routes rather than on applications: who is reachable at the top
+five companies, which dormant contacts are worth waking, which recruiters owe a
+reply.
+
+## Inbound during a public layoff decays - do not misread it
+
+If the person's employer has announced redundancies publicly, inbound will spike:
+recruiters work announcement lists, and approaches arrive that have nothing to do
+with the person's profile or any recent CV work. It feels like validation and it
+is mostly timing.
+
+Two consequences worth stating plainly. **Do not attribute the spike to their own
+efforts** - a CV rewrite that "clearly worked" may have done nothing, and they
+will draw the wrong lesson when the messages stop. **And the window is short** -
+inbound decays as the news goes stale, usually within weeks. While it is open,
+answer everything quickly and convert it into conversations, because that is the
+cheapest warm route they will get all search.
 
 ## Interviews and offers
 

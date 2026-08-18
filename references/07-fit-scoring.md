@@ -67,6 +67,22 @@ tracker exists to answer.
 Keeping the two scores separate is the whole point. A 10-fit role with odds of 3
 ranks below a 7-fit with odds of 8, and a single blended score cannot say that.
 
+**Cold-only applications cap Probability at 5.** No route in - no advocate, no
+referral, no prior contact, no reply from anyone - means the application competes
+purely on paper against every other applicant, and the observed conversion is
+poor. Real searches produce the same shape repeatedly: a stack of cold
+applications returning nothing or a two-day CV-screen rejection, alongside a
+single warm introduction reaching a hiring-manager conversation inside 48 hours.
+
+So the cap is not pessimism, it is calibration. Applying that ceiling has two
+useful effects. Cold roles stop crowding the top of the list on Fit alone, and
+the way to raise a role's Priority becomes obvious - **find a route in**, which is
+the action that actually moves the odds. Lift the cap the moment a route exists
+and record what changed.
+
+Where a whole week's list is cold-capped, that is the finding, not the roles. See
+`08-apply-and-followup.md`.
+
 ## The depth test
 
 Is the person's strongest differentiator the *core* of this role, or a feature
@@ -126,6 +142,10 @@ A score that only ever moves up is not a score.
 - **Several near-identical reqs at one employer** means reqs are being opened and
   closed quickly. Check whether the others are still open before assuming one
   rejection closed the door.
+- **Several *different* roles at one employer in a short window** is a hiring
+  cluster - a team being built by someone with budget right now. Score it as one
+  opportunity entered through a single conversation, not three applications. See
+  `04-sources.md`.
 - **Published salary bands** are rare outside a few ATS platforms. Where no band
   is published, any figure is a hypothesis to test on the first call, not data.
 

@@ -140,6 +140,50 @@ catches people and it is worth raising unprompted:
 Where an immigration route is in play, everything else in the search is
 downstream of holding it. Treat it as the first constraint, not a side issue.
 
+## Recruitment agencies: consent before submission
+
+This one protects the person and it is routinely not known, so raise it before
+they deal with any agency.
+
+**Insist on consent for a named employer before any CV goes out.** The firm
+ground here is data protection: a CV is personal data, and under GDPR the person
+is entitled to know who it is being shared with, to object, and to withdraw. "I
+have a great role, send me your CV" is not consent to submit anywhere, and the
+person is entitled to say so plainly.
+
+Do not rely on industry self-regulation to enforce this. The National Recruitment
+Federation operates a code of conduct for its members, but membership is
+voluntary and many agencies are not members - so treat the code as a reason to
+prefer an NRF agency, not as a protection that applies by default. The protection
+that always applies is the person saying no, in writing, before sending anything.
+
+The script is short and not confrontational:
+
+> Happy to send my CV. Before you submit it anywhere, tell me the company name
+> and confirm you will not send it on without my say-so for each specific role.
+
+Why it matters concretely for someone in a redundancy process:
+
+- **Their own employer.** A blind submission can land their CV back at the company
+  making them redundant, or at a client of it. Deeply awkward while still on
+  payroll and mid-consultation.
+- **Duplicate submissions.** If the person already applied direct, or another
+  agency has submitted them, employers commonly reject both candidates rather than
+  arbitrate the fee - losing a role they would otherwise have had.
+- **Companies they have ruled out.** The culture and depth filters from
+  `07-fit-scoring.md` only work if the person controls where they are put forward.
+
+Also worth knowing: it is **illegal to charge a jobseeker a fee** simply for
+agreeing to find them work - the employer pays. Anyone asking the person for money
+to place them is not operating legitimately. Employment agencies operating in
+Ireland must hold a licence, administered through the Workplace Relations
+Commission's licensing section, so a licence can be checked before engaging.
+
+If an agency submits them somewhere without consent, that is a data-protection
+complaint they can raise with the Data Protection Commission - and with the NRF
+too if the agency happens to be a member. Say it once; do not turn it into a
+campaign while they are mid-search.
+
 ## Should they take the package
 
 Not your call, and say so. What you can do is lay out the comparison:
@@ -166,6 +210,10 @@ advice - worth asking before paying for it independently.
 
 - Citizens Information - redundancy, notice, jobseeker payments:
   https://www.citizensinformation.ie
+- Data Protection Commission - your rights over your own data:
+  https://www.dataprotection.ie
+- National Recruitment Federation - code of practice and member list:
+  https://www.nrf.ie
 - Revenue - lump sum payments and exemptions:
   https://www.revenue.ie/en/personal-tax-credits-reliefs-and-exemptions/lump-sum-payments/basic-exemption.aspx
 - Workplace Relations Commission - collective redundancies:

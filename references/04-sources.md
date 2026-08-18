@@ -28,6 +28,24 @@ Do not scrape LinkedIn. Its terms forbid it, accounts get restricted, and the
 alerts do the same job legally. Read pages the person already has open in their
 own browser if you need to see a listing.
 
+**Build the search URL properly - plain keyword search under-returns badly.** A
+bare keyword search will hand back the same short, stale list run after run. The
+same search with the filter parameters set - a real `geoId` for the city rather
+than a typed location, an explicit `distance`, a date filter such as
+`f_TPR=r86400` for the last 24 hours, and a salary floor where relevant -
+routinely returns several times as many usable roles. Construct the URL once with
+the person, save it, and re-run that.
+
+This is using the site's own search with its own filters, in their browser. It is
+not scraping and nothing here asks them to circumvent anything.
+
+**The 24-hour window churns faster than a weekly scan.** Re-running the same
+filtered search a couple of hours later surfaces roles the earlier pass did not
+show. Postings appear, get promoted and get buried within a single day. A weekly
+cadence will therefore lose roles silently - not because the search is wrong but
+because the window moved. Tell the person this plainly and set the cadence
+accordingly: see `06-cadence-autonomy.md`.
+
 **A local tech job board.** In Dublin that is **Built In Dublin**; most tech
 cities have an equivalent (Built In runs several, and there are strong local
 boards elsewhere). These are frequently underrated: no login, visible posting
@@ -59,6 +77,48 @@ find the target employer's board, apply there, set an alert if offered.
 **A target-employer list is itself a source.** Twenty companies the person would
 actually join, monitored directly, will out-perform passive browsing - especially
 for roles that get filled before they are widely posted.
+
+## Agencies and hidden-employer listings
+
+A meaningful share of listings never name the employer - recruitment agencies
+posting on behalf of a client, and aggregators that republish a role behind their
+own branding. Treat them as a distinct source type, because they behave
+differently from everything above.
+
+**Log them, but log what you do not know.** The company field reads
+`[EMPLOYER NOT DISCLOSED - via <agency>]`, never a guess. Two hidden listings can
+easily be the same underlying role, and a guess makes that impossible to detect.
+
+**Find the underlying posting before applying.** The role text is often
+identifiable - paste a distinctive sentence into a search and the employer's own
+posting frequently appears. Applying direct is better than applying through an
+intermediary who takes a fee and controls the timeline.
+
+**Never let an agency submit a CV before they name the client.** This is the rule
+that protects the person, and in Ireland it has legal and code-of-practice force -
+see `09-ireland-redundancy.md`. Blind submission risks the CV landing at their
+current employer, at a company where they already have a live application, or at
+one they have deliberately ruled out. It also creates duplicate-candidate
+disputes that get the person dropped by both routes.
+
+**Watch for the same role appearing three times.** One employer posting, one
+agency version and one aggregator copy is common. The tracker should hold one row
+with the routes noted, not three rows inflating the pipeline.
+
+## Hiring clusters
+
+Several roles appearing at one employer inside a short window - three in a day, a
+handful in a week - is not three opportunities. It is a team being built, and it
+means someone there has budget and a mandate right now.
+
+Enter through **one conversation, not three applications**. Applying separately to
+each puts the person in three parallel screens, often with the same recruiter, and
+signals scattershot interest. A single message to the hiring manager or team lead
+asking which of the roles best fits their background is a stronger opening and
+frequently reaches a human faster.
+
+Record the cluster in the tracker as a single entry with the roles listed, so it
+does not read as three stalled applications a fortnight later.
 
 ## Tier 3 - the one that actually converts
 
