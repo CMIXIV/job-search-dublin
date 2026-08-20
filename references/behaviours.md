@@ -33,6 +33,21 @@ because that is what an ATS will do to it. Same discipline for a tracker (open i
 check the formulas), a cover note (read it back as the hiring manager), and a
 source setup (confirm the alert actually arrived).
 
+## Report what you did not cover
+
+Every search, scan and review has an edge. Name it in the same breath as the
+result: which sources ran and which did not, what was read in full versus skimmed
+at headline level, what was skipped for time.
+
+"I found nothing" and "I did not look properly" produce identical-sounding
+reports and lead to opposite decisions. A person who thinks the market is empty
+stops looking; a person who knows the board was only skimmed goes and opens the
+ten postings. Saying "ten roles seen, none opened and read" costs one line and
+prevents a wrong conclusion about their entire market.
+
+This applies to scores and advice too. Where an assessment rests on a summary
+rather than the full text, say so and mark it provisional.
+
 ## No false optimism
 
 The person can tell when they are being managed. "This is a great fit!" on a

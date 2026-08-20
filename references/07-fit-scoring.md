@@ -39,6 +39,20 @@ Filters that have come out of real searches:
 Write each filter down with the decline that produced it. A filter with a story
 attached gets applied; an abstract preference does not.
 
+**A filter without a number is not a filter.** "Contract is fine if the rate is
+right", "I'd relocate for enough money", "senior is acceptable at a good company"
+all sound like decisions and none of them are. Every instance gets re-argued from
+scratch, which is precisely what the filter was supposed to prevent.
+
+Push for the figure at the moment the filter is created, while the example that
+prompted it is in front of them - the day rate floor, the salary that justifies
+the move, the conditions that make a lateral title acceptable. If they genuinely
+cannot answer yet, record that as an open item with a date, not as a filter.
+
+For contract and day-rate roles specifically: the rate is a first-call question
+and never goes in an application. But the floor is agreed in advance, privately,
+so the first call is a check rather than a negotiation with themselves.
+
 ## Three numbers
 
 **Fit /10 - does this map to what they have actually shipped?**

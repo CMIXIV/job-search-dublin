@@ -151,6 +151,23 @@ of a link as a claim.
 2. **Every link contains a token from its own row** - the company name, or the req
    ID. A link naming a different company than the row it sits on is wrong by
    definition.
+3. **Classify the shape of the URL.** This is the check that catches the rest,
+   because it needs no knowledge of the row. A specific posting almost always
+   carries an identifier - a req number, a job ID, a long slug. These shapes
+   never do, and are search results or landing pages however plausible they look:
+
+   - a search path or query - `/jobs/search`, `?keywords=`, `?query=`
+   - a careers or jobs index - a URL ending in `/careers` or `/jobs`
+   - an ATS tenant or company root with no job path - `<company>.myworkdayjobs.com/SITE`,
+     `job-boards.greenhouse.io/<company>`, `jobs.ashbyhq.com/<company>`
+
+**Flag them visibly rather than dropping them.** A URL of the wrong shape is
+still a useful breadcrumb - it says where to go looking. What it must not do is
+present itself as the posting. Where the tracker can render, show these in a
+warning colour labelled *"search link only - posting URL not verified"*. In a
+spreadsheet, prefix the cell with `SEARCH ONLY:`. The person then knows at a
+glance which rows still need the real URL found, instead of discovering it while
+trying to apply.
 
 Postings expire, so save the JD text alongside the link at capture time. A dead
 URL with the description saved is recoverable; a dead URL alone is not.

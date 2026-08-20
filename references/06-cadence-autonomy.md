@@ -95,15 +95,56 @@ If someone wants it anyway, be straight: it is their account, their reputation
 and their market. This skill will help them apply faster and better; it will not
 press send for them.
 
+## Phase 4 is a precondition, not a suggestion
+
+**Do not schedule discovery until the sources from `04-sources.md` are actually
+configured.** This is the failure mode that quietly wrecks the whole loop, and it
+is invisible from the outside.
+
+If there is no saved LinkedIn search, no board alert and no per-employer alerts,
+then a scheduled "scan" has nothing to scan. What it does instead is run the same
+cold web searches every time - which returns the same aggregator noise week after
+week, misses everything that requires a login or a filter, and produces a digest
+that looks like a real scan and is not one. The person then reasonably concludes
+the market is empty, when what is empty is the source stack.
+
+So before scheduling anything, check and say out loud:
+
+- Which sources are configured, by name
+- Which are not, and what setting each one up would take
+- What the scan will therefore actually cover
+
+If nothing is configured, **say that plainly and fix it first**. A digest built
+on cold search is worse than no digest, because it manufactures false confidence
+that the ground has been covered.
+
+Re-check this whenever results go quiet. "The market has gone quiet" and "my
+sources stopped working" produce identical-looking weeks, and only one of them is
+about the market.
+
 ## Setting up the schedule
 
 Create a scheduled task at the chosen cadence that runs discovery, scores new
 roles, updates the tracker, and delivers the digest. Include in it:
 
-- New roles per source, with fit scores and one-line rationales
+- **Which sources were actually run**, named, and which were not
+- **How deeply each was covered** - roles read in full versus seen at headline
+  level only. "Ten postings seen on the board, none opened" is a materially
+  different result from "ten read and scored", and reporting them the same way
+  turns an unfinished scan into a false all-clear
+- New roles per source, with Fit, Probability and one-line rationales
+- **What was found and deliberately not added, with the reason** - wrong function,
+  wrong level, language requirement, failed a standing filter. This is how the
+  person audits the filters instead of trusting them blindly, and it is where the
+  next standing filter usually comes from
 - Applications with a next action due this week
 - Applications with no response past the follow-up threshold
 - One honest line on how the week went against the target
+
+**Deduplicate against the tracker, not against the last digest.** Scheduled tasks
+sometimes fire twice in a day, and a second pass will happily re-surface roles
+already logged. Match new finds against what is already in the tracker before
+reporting them, or the pipeline inflates with duplicates of itself.
 
 Make pausing trivial and say so when setting it up.
 
