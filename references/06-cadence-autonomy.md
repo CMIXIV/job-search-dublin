@@ -127,6 +127,8 @@ about the market.
 Create a scheduled task at the chosen cadence that runs discovery, scores new
 roles, updates the tracker, and delivers the digest. Include in it:
 
+- **The three things to do next, named as actions, in order** - the first thing
+  in the digest, before any counts or lists. See `05-tracker.md`
 - **Which sources were actually run**, named, and which were not
 - **How deeply each was covered** - roles read in full versus seen at headline
   level only. "Ten postings seen on the board, none opened" is a materially

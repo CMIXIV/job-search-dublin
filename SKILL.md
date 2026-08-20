@@ -41,11 +41,13 @@ much runway the person has, which changes everything about urgency in phase 2.
    and resume - do not re-run intake on someone who already sat through it.
 2. If it does not exist, create the folder and start at phase 1.
 3. Say where you are in one line ("You're set up through phase 4 - sources
-   configured, tracker not built yet"), then continue. No re-briefing.
+   configured, tracker not built yet"), then the current top three actions and
+   how old they are. Then continue. No re-briefing.
 
 `job-search/00-state.md` holds: phase reached, decisions made and why, autonomy
-level chosen, tracker location, sources configured, and anything the person asked
-you never to raise again. Update it at the end of every session. It is the reason
+level chosen, tracker location, sources configured, **the current top three
+actions with the date they were set**, and anything the person asked you never to
+raise again. Update it at the end of every session. It is the reason
 this works across weeks rather than restarting every chat.
 
 ## Working folder

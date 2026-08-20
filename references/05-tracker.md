@@ -96,6 +96,45 @@ feedback given. Permanent; it outlives the current search.
 per source. Formulas do this automatically in the generated file. Read it monthly
 and reweight where the time goes.
 
+## Open with the three things to do next
+
+Whatever the substrate, the first thing the person sees should be **three named
+actions, in order** - not counts, not a sorted table.
+
+Counts describe the pipeline. "38 tracked, 9 live, 4 overdue" is ambient
+information and decides nothing. A table sorted by Priority is better, but it
+still asks someone to read and interpret thirty rows at the moment they have the
+least appetite for it. Naming three collapses that into a decision they can act
+on in the next hour.
+
+    THIS WEEK — updated 20 Aug
+    1. Brightflag — prep the MCP answer before Thursday's call
+    2. Mastercard — ask Sinead for the referral, application is 9 days cold
+    3. Marsh cluster — one message to the hiring manager, not three applications
+
+Three rules make it worth having:
+
+**Name actions, not roles.** "Brightflag, priority 9.5" tells them nothing they
+did not already know. The action is the deliverable.
+
+**Date it and regenerate it whenever the tracker changes.** A header telling
+someone to apply to a role they applied to on Monday is worse than no header - it
+teaches them the top of the page is stale and they stop reading it.
+
+**Keep it separate from the overdue list.** Chases are time-driven maintenance;
+the top three are priority-driven work. Merged, the important gets buried under
+the merely due. Show both, labelled differently.
+
+**When every live role is cold-capped** (see `07-fit-scoring.md`), at least one of
+the three should be a route-building action - a contact to approach, an
+introduction to ask for - rather than a fourth application. Otherwise the header
+faithfully directs the person to keep doing the thing that is not working.
+
+Where the tracker renders - an HTML view, a dashboard - this belongs in the
+header. In a spreadsheet it does not: rows above the header break sorting and
+filtering. There, keep it in `job-search/00-state.md` and at the top of each
+digest instead.
+
 ## Rules for keeping it honest
 
 **One row per role, added the moment it is found**, before deciding whether to
