@@ -130,6 +130,7 @@ Everything lives in a `job-search/` folder inside whatever folder you connect:
 
     python3 scripts/make_tracker.py --out ~/job-search
     python3 scripts/ats_check.py ~/job-search/03-master-cv.pdf --claims claims.txt
+    python3 scripts/verify_check.py
 
 `make_tracker.py` writes an `.xlsx` with four tabs — applications, contacts,
 interview history and a source summary with working attribution formulas — plus
@@ -142,6 +143,11 @@ details and key claims survived — plus the structural things that break parser
 tables, text boxes, two-column layouts, content stranded in headers. Uses
 `pdftotext`, `pdfplumber` or `pypdf` for PDFs and `python-docx` for Word files,
 whichever is present.
+
+`verify_check.py` regression-tests the phase-7 verification protocol
+(`references/10-verification.md`) — the rules that stop a live role being
+reported dead. Run it after touching that file or the verdict logic it
+encodes; it fails loudly rather than warning.
 
 ## Things it deliberately will not do
 

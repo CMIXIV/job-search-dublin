@@ -7,6 +7,12 @@ argument being had twice.
 
 ## Screen first - before scoring, before tailoring
 
+**Verify before anything else.** Run `references/10-verification.md` first.
+LIVE roles get scored. GONE roles do not - there is nothing to score. An
+UNVERIFIED role can be scored provisionally, marked as such in the row, and
+re-checked; treating UNVERIFIED as GONE and dropping it silently loses roles
+that were never actually confirmed dead.
+
 **Hard gates.** If a role fails one of these it is out, whatever it looks like.
 Name the gate and move on.
 
@@ -96,6 +102,46 @@ and record what changed.
 
 Where a whole week's list is cold-capped, that is the finding, not the roles. See
 `08-apply-and-followup.md`.
+
+## Decay signals - live is not the same question as winnable
+
+Liveness (`references/10-verification.md`) answers *does this requisition
+exist*. It gates whether a role is scored at all - an UNVERIFIED or GONE role
+does not reach this section. Decay answers a different question: *is this
+worth an application, given how it has aged*. It adjusts Probability only.
+
+**Decay never changes Fit.** Fit measures the match between the person and the
+role, and a requisition being old does not make it a worse match. Moving Fit
+to justify a recommendation - or a decline - is the exact self-deception
+"Never distort a score to express a preference" above already prohibits. A
+stale posting is a Probability problem, not a Fit problem, and scoring it as
+one hides the reason from the next person who reads the row.
+
+Signals to weigh, each with what it actually means:
+
+- **A repost flag at all.** The first attempt to fill it failed, or it is a
+  standing pipeline requisition. Either way, the bar or the process is not
+  what a fresh posting implies.
+- **Age since posting or reposting.** Use explicit bands rather than
+  judgement call each time: **under 3 weeks** - no adjustment. **Beyond
+  roughly 6 weeks** - a visible cut. **Beyond roughly 3 months** - a heavy
+  cut, stated in the row.
+- **An evergreen or pipeline requisition id** - not a specific opening but a
+  standing "always be sourcing" listing. Treat as a heavy cut regardless of
+  fit, and say so in the row.
+- **Applicant counts in the hundreds.** A crowded field competing on paper
+  alone. Cut.
+- **"Promoted" or sponsored.** Genuinely ambiguous - either urgency or
+  difficulty filling. Note it in the row; do not score it alone.
+- **"Responses managed off-platform."** Not a decay signal - a routing hint.
+  It names where the real ATS is, which shortens the next verification. See
+  the escalation ladder in `references/10-verification.md`.
+
+Write the adjustment into the role's notes with its reason, the same
+discipline as the comp-and-title adjustment under Priority above. A cut
+without a reason cannot be argued with, and a person who disagrees with a
+silent cut will just distrust the whole score instead of the one signal that
+drove it.
 
 ## The depth test
 

@@ -28,7 +28,7 @@ setup, done once. Phases 6-7 repeat weekly for as long as the search runs.
 | 4 | Source stack setup | `references/04-sources.md` | `job-search/04-sources.md` |
 | 5 | Tracker setup | `references/05-tracker.md` | tracker, wherever they chose |
 | 6 | Cadence and autonomy | `references/06-cadence-autonomy.md` | schedule + `job-search/00-state.md` |
-| 7 | Screen, score, apply, follow up | `references/07-fit-scoring.md`, `references/08-apply-and-followup.md` | tracker rows, tailored CVs |
+| 7 | Verify, screen, score, apply, follow up | `references/10-verification.md`, `references/07-fit-scoring.md`, `references/08-apply-and-followup.md` | tracker rows, tailored CVs |
 
 Ireland-specific redundancy entitlements, notice, tax on the package and welfare
 are in `references/09-ireland-redundancy.md`. Pull it whenever money, notice
@@ -91,6 +91,14 @@ Discovery through alerts is both legal and, in practice, faster.
 similar is not something the same. Anyone qualified to interview on it will spot
 the substitution, and then the whole application is suspect rather than one
 claim. Close the gap or name it - see `references/08-apply-and-followup.md`.
+
+**Never report a role dead without a positive control.** A failed lookup is not
+a dead requisition until the same board is shown to be serving other current
+ones. Closing a live role costs the person an opportunity they will never know
+they had. See `references/10-verification.md`.
+
+**Never collapse "could not check" into "not there."** UNVERIFIED is a
+verdict, and reporting it honestly is more useful than a confident guess.
 
 **Say the discouraging thing.** If their target title is two levels above their
 evidence, if a role is a bad fit, if the package on the table is better than the

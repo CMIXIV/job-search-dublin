@@ -134,7 +134,9 @@ roles, updates the tracker, and delivers the digest. Include in it:
   level only. "Ten postings seen on the board, none opened" is a materially
   different result from "ten read and scored", and reporting them the same way
   turns an unfinished scan into a false all-clear
-- New roles per source, with Fit, Probability and one-line rationales
+- New roles per source, with verdict (LIVE, GONE or UNVERIFIED), Fit,
+  Probability and one-line rationales. Report the UNVERIFIED count explicitly -
+  it is a gap to re-check, not a silent drop. See `references/10-verification.md`
 - **What was found and deliberately not added, with the reason** - wrong function,
   wrong level, language requirement, failed a standing filter. This is how the
   person audits the filters instead of trusting them blindly, and it is where the
