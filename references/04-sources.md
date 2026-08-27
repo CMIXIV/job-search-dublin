@@ -25,8 +25,52 @@ alerts, and use "Easy Apply" filters sparingly - Easy Apply roles get hundreds o
 applicants and convert poorly.
 
 Do not scrape LinkedIn. Its terms forbid it, accounts get restricted, and the
-alerts do the same job legally. Read pages the person already has open in their
-own browser if you need to see a listing.
+alerts do the same job legally.
+
+**Reading a person's own saved search through their logged-in browser** -
+including paging through it and opening individual listings - is not
+scraping, provided it stays inside their authenticated session at ordinary
+browsing pace: no raw requests to LinkedIn's endpoints, no bypassing login or
+bot-detection, no extracting at a scale beyond what the person would see
+themselves paging through the same search. Claude in Chrome (or an equivalent
+browser-automation tool) is the right way to do this in practice. A few
+things about how LinkedIn's UI actually behaves make it worth doing a
+specific way:
+
+- **Page by URL, not by clicking "Next."** LinkedIn's job search accepts a
+  `start` parameter (`start=25`, `start=50`, ...) - navigating it directly is
+  far more reliable than repeated pagination clicks, and each page's full
+  card list (title, company, location, posted-time, comp if shown) comes back
+  cleanly from a single page-text read. Batch a few page loads together in
+  one tool round-trip rather than one page per call.
+- **The platform's own result count drifts as you page** - it is a live,
+  approximate index, not a fixed total. Expect that and don't treat it as an
+  error.
+- **Opening one listing for a closer look is less reliable via element
+  references than via a screenshot and a direct click on the visible card** -
+  element-reference clicks on this UI sometimes silently no-op. Take a
+  screenshot, click the coordinates, then give the detail pane a moment to
+  load before reading it - it renders asynchronously and an early read can
+  return the previous listing's content.
+- **Treat LinkedIn's own description pane as unreliable, even logged in.**
+  Full job descriptions there are frequently truncated behind a "...more"
+  toggle or stuck on a loading placeholder that never resolves. Don't fight
+  it - the instruction this file already gives for every other discovery
+  source applies here without modification: LinkedIn tells you a role
+  exists; the employer's own board is where you actually read it and confirm
+  it's live.
+- **Close every tab opened this way once its listing has been read**, same as
+  any other browser-automation task.
+
+A real example from the search this skill was built from: for one person's
+roughly hundred-result weekly search, the full discovery pass - every page,
+every card's title and company and posting date - took a handful of batched
+tool calls and surfaced several genuinely new leads. Trying to read each
+listing's complete description from LinkedIn's own pane, by contrast, cost
+proportionally more effort than it returned; the same descriptions came back
+complete and reliable moments later, straight from the employer's own board,
+which is exactly where they needed to be read from anyway to verify the role
+was still live.
 
 **Build the search URL properly - plain keyword search under-returns badly.** A
 bare keyword search will hand back the same short, stale list run after run. The
