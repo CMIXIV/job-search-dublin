@@ -13,8 +13,14 @@
 
 ## Cover notes
 
-Short. Three paragraphs, under 200 words, in the person's voice - not a formal
-register they would never use in a meeting.
+Short. Aim for under 200 words, in the person's voice - not a formal register
+they would never use in a meeting. In practice a complete note - hook, one or
+two role-specific evidence points, a clear close - often lands around
+200-250 words (roughly 1,300-1,500 characters), even after being deliberately
+trimmed down from longer first drafts; that's an acceptable safe default and
+not, on its own, a sign the note needs cutting further. That range comes from
+a single search, though, so treat it as a loose target rather than a hard
+ceiling.
 
 - **Why this role, specifically.** One detail from the JD that a generic note
   could not contain. If nothing in the JD is specific enough to reference, that

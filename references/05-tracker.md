@@ -21,6 +21,32 @@ build whatever they pick.
   inline, filters, sortable columns and an overdue view. Excellent to *read* and
   review from, poor for data entry. Works best regenerated from the spreadsheet
   rather than replacing it.
+
+  If you build one, three implementation traps are worth naming up front. All
+  three were real, silent bugs in one such build:
+
+  - **Compute every summary figure at render time - never hand-author one into
+    static markup.** A dashboard's header or summary line is the part most
+    likely to be read and least likely to be re-derived on every edit. In one
+    build, the header was static prose written once and never wired to the
+    underlying data; every later update correctly refreshed the table but
+    silently left the header's counts and named roles wrong for days, because
+    nothing in the update path ever touched it. If a header names a count, a
+    most-recent date, or a specific role, generate that line from the live
+    dataset every time the page loads or is rebuilt - never type a number or a
+    name directly into the template.
+  - **Don't parse display-formatted dates with a generic numeric fallback.** A
+    sortable date column that falls back to something like `parseFloat()` on a
+    string such as `"27 Aug 2026"` reads only the leading integer - 27 - and
+    ignores month and year entirely, so `"6 Sep 2026"` silently sorts before
+    `"27 Aug 2026"`. If a column sorts by date, parse it with an actual date
+    parser (or a small regex that extracts day/month/year explicitly), and
+    route blank values to one consistent end of the sort regardless of
+    direction.
+  - **If it's published somewhere the person bookmarks, keep it at one stable
+    address across updates.** Republishing to a new link on every change
+    breaks the habit of checking it - update the existing page in place
+    instead.
 - **A dedicated job-search app** (Teal, Huntr and similar) - browser extensions
   that capture roles in one click, which is genuinely useful. The cost is that
   the data sits in someone else's product and is harder for you to work with.
@@ -80,6 +106,30 @@ Passed measures the person's own filters - and reviewing the Passed rows with
 their reasons is exactly how the screening filters in `07-fit-scoring.md` get
 discovered. A tracker that cannot express "I decided against this, because" loses
 the more useful half of the data.
+
+**Archive closed rows, don't just flag them.** When a role closes - Rejected,
+Passed, or removed as a standing-monitor declutter rather than an actual
+decision - take it out of the live tracker entirely and append it to a
+separate, dated archive file (e.g. `job-search/tracker/closed-archive.md`) as a
+numbered batch, with a one-line note on what the batch contains and why. Left
+in the live tracker indefinitely, closed rows crowd out the view the person
+checks most; deleted outright, the reasoning behind a decline disappears -
+and resurfaces as an open question the next time a similar role appears.
+
+Keep each row's original Fit, Probability and Priority numbers and reasoning
+intact - don't compress it down to a status word - and add a **Why it closed**
+line. For a declutter rather than a decline, add a **Watch** line naming what
+would justify re-adding the role: a specific signal, or a standing instruction
+to re-check a source on a schedule (see the cadence guidance in
+`06-cadence-autonomy.md`). Keep the same fields as the Applications schema
+above, so an archived entry and a live one read as the same system.
+
+A real example from the search this skill was built from: a batch of five
+roles closed in one sitting - one a genuine decline, four a monitor declutter -
+and the four declutter entries each got their own "recheck this source for
+senior-level roles on every future scan" instruction. That is a materially
+different thing to preserve than a plain removal, and it would have been lost
+if the rows had simply been deleted.
 
 **Interview history** gets its own tab. Keep a permanent list of every company and level where a
 process ended, with any feedback given. It stops low-value re-applications and
