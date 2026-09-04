@@ -129,6 +129,7 @@ Everything lives in a `job-search/` folder inside whatever folder you connect:
 ## Scripts
 
     python3 scripts/make_tracker.py --out ~/job-search
+    python3 scripts/tracker_lint.py ~/job-search/job-search-tracker-applications.csv
     python3 scripts/ats_check.py ~/job-search/03-master-cv.pdf --claims claims.txt
     python3 scripts/verify_check.py
 
@@ -136,6 +137,13 @@ Everything lives in a `job-search/` folder inside whatever folder you connect:
 interview history and a source summary with working attribution formulas — plus
 CSVs for importing into Sheets, Notion or Airtable. Needs
 `openpyxl`, or run `--csv-only` with no dependencies.
+
+`tracker_lint.py` checks the applications tab for the things that hide in plain
+sight: a status outside the five-value vocabulary, an `In process` row that
+cannot name where the process stands, a link that is really a search or a board
+root or the row above's URL, a file path that points at nothing, an applied row
+whose chase date quietly passed, and — with `--masthead` — a header dated
+anything other than today. Standard library only.
 
 `ats_check.py` extracts the text back out of your CV the way an applicant
 tracking system would, and tells you whether your section headings, contact

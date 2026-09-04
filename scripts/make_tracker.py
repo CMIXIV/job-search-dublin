@@ -25,7 +25,7 @@ APPLICATIONS = [
     "Location / mode", "JD link", "Posted", "Salary band",
     "Fit", "Probability", "Priority",
     "Why", "Watch", "Route", "Advocate",
-    "Status", "Date applied", "Next action", "Due", "CV used", "Notes",
+    "Status", "Stage", "Date applied", "Next action", "Due", "CV used", "Notes",
 ]
 
 # Where a listing hides the employer, Company reads
@@ -50,16 +50,25 @@ CONTACTS = [
     "Last contact", "Next follow-up", "Status", "Notes",
 ]
 
-SOURCES = ["Source", "Roles found", "Applications", "Recruiter calls",
-           "In process", "Offers"]
+SOURCES = ["Source", "Roles found", "Applications", "In process", "Rejected",
+           "Offers"]
 
+# Status is a bucket of exactly five values; where a process actually stands is
+# a sentence, and it goes in Stage. A real tracker's status column reached
+# seventeen bespoke strings in a fortnight, and anything deciding "live" by
+# matching Status against a known set then counted every screen, panel and
+# hiring-manager round as not applied. The data validation below is what stops
+# the eighteenth string being typed.
+#
 # Rejected (they declined you) and Passed (you declined them, or closed a dead
 # application at day 30) are deliberately distinct - the Passed rows are where
 # your screening filters come from.
-STATUSES = [
-    "Alert only", "Not started", "Researching", "Applied", "Recruiter call",
-    "In process", "Onsite/Final", "Offer", "Rejected", "Passed",
-]
+STATUSES = ["Scored", "Applied", "In process", "Rejected", "Passed"]
+
+# Stage is free text and deliberately un-validated. It should read like a state
+# someone can act on: "Screen confirmed Wed 09:00", "Panel held, awaiting
+# outcome", "Escalation live - introduction made", "Offer verbal, written
+# pending", "Agency submitted, client named".
 
 DEPTHS = ["High", "Medium", "Low"]
 
@@ -79,7 +88,7 @@ EXAMPLE_ROW = [
     "Core of the role is the thing I am best at, not a bolt-on",
     "They name a tool I have never used - do not blur it with the adjacent one",
     "Direct application, no route in yet", "",
-    "Not started", "", "Read full JD and re-score", "2026-08-18", "", "",
+    "Scored", "", "", "Read full JD and re-score", "2026-08-18", "", "",
 ]
 
 
@@ -115,21 +124,26 @@ def write_xlsx(out_dir):
     head_fill = PatternFill("solid", fgColor="2F4858")
 
     def style_header(ws, header, widths):
+        """widths is keyed by column *name*. Keying it by position was the same
+        mistake the formula column letters below already document: inserting a
+        column silently repoints every entry after it."""
         ws.append(header)
-        for i, _ in enumerate(header, start=1):
+        for i, name in enumerate(header, start=1):
             cell = ws.cell(row=1, column=i)
             cell.font = head_font
             cell.fill = head_fill
             cell.alignment = Alignment(vertical="center", wrap_text=True)
-            ws.column_dimensions[get_column_letter(i)].width = widths.get(i, 16)
+            ws.column_dimensions[get_column_letter(i)].width = widths.get(name, 16)
         ws.freeze_panes = "A2"
         ws.auto_filter.ref = f"A1:{get_column_letter(len(header))}1"
 
     ws = wb.active
     ws.title = "Applications"
     style_header(ws, APPLICATIONS, {
-        4: 22, 5: 28, 8: 20, 9: 26, 10: 22, 11: 30, 12: 24,
-        17: 40, 18: 40, 19: 30, 23: 30, 26: 34})
+        "Company": 22, "Role title": 28, "Via": 20, "Consent": 26,
+        "Location / mode": 22, "JD link": 30, "Posted": 24,
+        "Why": 40, "Watch": 40, "Route": 30, "Stage": 34,
+        "Next action": 30, "Notes": 34})
     ws.append(EXAMPLE_ROW)
 
     # Column letters are derived from APPLICATIONS, never hard-coded - inserting
@@ -161,13 +175,13 @@ def write_xlsx(out_dir):
                 value=f'=IF(COUNT({f}{r}:{pr}{r})=2,AVERAGE({f}{r}:{pr}{r}),"")')
 
     ws_c = wb.create_sheet("Contacts")
-    style_header(ws_c, CONTACTS, {4: 30, 9: 34})
+    style_header(ws_c, CONTACTS, {"How they can help": 30, "Notes": 34})
 
     ws_h = wb.create_sheet("Interview history")
-    style_header(ws_h, HISTORY, {5: 22, 7: 40, 8: 34})
+    style_header(ws_h, HISTORY, {"Stage reached": 22, "Feedback": 40, "Notes": 34})
 
     ws_s = wb.create_sheet("Source summary")
-    style_header(ws_s, SOURCES, {1: 28})
+    style_header(ws_s, SOURCES, {"Source": 28})
     for i, src in enumerate(DEFAULT_SOURCES, start=2):
         ws_s.cell(row=i, column=1, value=src)
         src_c, app_c, st_c = col["Source"], col["Date applied"], col["Status"]
@@ -177,17 +191,24 @@ def write_xlsx(out_dir):
             f'=COUNTIFS(Applications!${src_c}$2:${src_c}$500,$A{i},'
             f'Applications!${app_c}$2:${app_c}$500,"<>")'
         ))
-        for c, stage in ((4, "Recruiter call"), (5, "In process"), (6, "Offer")):
+        for c, status in ((4, "In process"), (5, "Rejected")):
             ws_s.cell(row=i, column=c, value=(
                 f'=COUNTIFS(Applications!${src_c}$2:${src_c}$500,$A{i},'
-                f'Applications!${st_c}$2:${st_c}$500,"{stage}")'
+                f'Applications!${st_c}$2:${st_c}$500,"{status}")'
             ))
+        # Offer is a stage of In process, not a status - count it from the text.
+        stg_c = col["Stage"]
+        ws_s.cell(row=i, column=6, value=(
+            f'=COUNTIFS(Applications!${src_c}$2:${src_c}$500,$A{i},'
+            f'Applications!${stg_c}$2:${stg_c}$500,"*offer*")'
+        ))
     note_row = len(DEFAULT_SOURCES) + 3
     ws_s.cell(row=note_row, column=1,
-              value="Applications counts rows with a 'Date applied'. Stage columns "
-                    "count current status only - a role now at Offer no longer "
-                    "counts as a Recruiter call. Compare warm routes (Advocate "
-                    "filled) against cold ones at least monthly.")
+              value="Applications counts rows with a 'Date applied'. In process and "
+                    "Rejected count current status only. Offers matches the word "
+                    "'offer' in the Stage column, because Offer is a stage of In "
+                    "process, not a status of its own. Compare warm routes "
+                    "(Advocate filled) against cold ones at least monthly.")
 
     path = os.path.join(out_dir, "job-search-tracker.xlsx")
     wb.save(path)

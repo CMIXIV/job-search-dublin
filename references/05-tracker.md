@@ -61,19 +61,40 @@ without them degrades into a list of links within a fortnight.
 | **Watch** | The one thing that could sink it, named honestly |
 | Route | How this application gets in - direct, referral, advocate, recruiter |
 | Advocate | Who inside, and the relationship. The strongest single predictor, and the one worth creating |
-| Status | See the vocabulary below |
+| Status | One of exactly five values. See the vocabulary below |
+| Stage | The sentence: where this process actually stands, in words |
 | Date applied | Starts the chase clock |
 | Next / Due | The literal next action and its date. Sorting by Due is the week's to-do list |
 | CV used | Path to the exact file sent |
 | Notes | Interviewers, questions asked, salary discussed |
 
-**Status vocabulary.** Keep these distinct - the distinctions are what make the
-tracker analysable:
+**Status is a bucket of exactly five values. A stage is a sentence.** Anything
+that describes *where a particular process stands* goes in Stage, never in
+Status:
 
-`Alert only` (monitoring, not pursuing) · `Not started` · `Researching` ·
-`Applied` · `Recruiter call` · `In process` · `Onsite/Final` · `Offer` ·
-`Rejected` (they declined you) · `Passed` (you declined them, or you closed a
-dead application at day 30)
+`Scored` (read and scored, no application - includes roles being monitored) ·
+`Applied` (in, no human engaged) · `In process` (a named human is engaged -
+screen, round, panel, agency submission, live escalation) · `Rejected` (they
+declined you) · `Passed` (you declined them, or you closed a dead application at
+day 30)
+
+Stage is where the detail lives, and it should read like a sentence someone
+could act on: *"Panel held Thursday, awaiting outcome"*, *"Screen confirmed Wed
+09:00"*, *"Escalation live, introduction made"*, *"Offer verbal, written pending"*.
+
+**Why this is worth being strict about.** The status column of a real tracker
+reached **seventeen distinct strings** in a fortnight, each of them a small
+sentence. The visible cost was that filtering stopped working. The real cost was
+worse: anything rendering the board decided "live" by matching Status against a
+known set, so the **nine most important rows - every screen, panel and
+hiring-manager round - were counted as not applied**. No chase ladder, no
+overdue flag, and a live count reading 15 when it was 24. A vocabulary that
+drifts does not degrade gracefully; it silently reclassifies the rows that
+matter most.
+
+A tracker that renders can show Stage as the visible text and Status as the
+filter behind it. In a spreadsheet, put a data-validation list on Status so the
+seventeenth string cannot be typed. `scripts/make_tracker.py` does this.
 
 **Rejected and Passed are not the same status.** Rejected measures the market.
 Passed measures the person's own filters - and reviewing the Passed rows with
@@ -121,6 +142,28 @@ did not already know. The action is the deliverable.
 someone to apply to a role they applied to on Monday is worse than no header - it
 teaches them the top of the page is stale and they stop reading it.
 
+**The masthead is not generated from the rows - edit it in the same pass.** This
+is the one that actually went wrong. The top of a tracker is a separate input
+from the row data and nothing regenerates it. In one session five rows were
+closed, three chases drafted, two roles scored and eleven republishes went out
+while the header still carried a date four days old and told the person to chase
+a row that had already been passed on. **The part he reads first was the only
+part that was wrong**, and "rebuilt cleanly" said nothing about it, because
+nothing in the build looks at the header. Three rules:
+
+- `updated` is set **from the clock**, never from memory.
+- The top three are **re-derived from priority, not aged**. A card whose action
+  has already been done is worse than no card at all.
+- A build that cannot warn on a header date that is not today should be made to.
+  See the lint in `scripts/tracker_lint.py`.
+
+**The masthead note is reader-facing, not a log.** It became a wall of italics
+recording every decision since the search opened, and the person scrolled past
+it - which meant scrolling past the three actions too. Empty by default, hidden
+when empty, one line when there is genuinely one thing to say. Reasoning belongs
+in the decision log, role-specific detail in the role's own file, and method in
+the rules file. Convenience decided that filing before; fit should decide it.
+
 **Keep it separate from the overdue list.** Chases are time-driven maintenance;
 the top three are priority-driven work. Merged, the important gets buried under
 the merely due. Show both, labelled differently.
@@ -143,6 +186,32 @@ on, or why.
 
 **Status changes get a date.** "No response" after 21 days is a status, not a
 gap - it is how the market's response rate gets measured.
+
+**Dates come from the clock, and weekdays are computed.** Three failures in two
+days: a day's work stamped with the previous day's date because the session's
+idea of "today" had gone stale, a scan file named with the wrong date for the
+same reason, and a confirmed "9 September" written as *Tuesday* when it is a
+Wednesday. Dates here are load-bearing - the chase ladder computes day 10, 21
+and 30 from the applied date, and the closed date is what makes the archive
+auditable - so **an approximate date is an invented fact**, no different from an
+invented metric on a CV. Check the actual date before writing one, compute any
+weekday rather than recalling it, and where a source gives a date with no
+weekday, leave the weekday off rather than add an unverified one.
+
+**A due date is not a record of anything.** Six rows sat at "chase due" having
+never been chased: *"Chase 27 Aug"* meant only that somebody once intended to.
+Before advising on a row, ask what was actually sent, and when. That answer is
+the state; the field is a plan.
+
+The board's failure runs in exactly one direction - **it lags reality, and the
+lag always flatters** - because a field updates when someone updates it, and
+nobody updates a field to record that they did nothing.
+
+There is a corollary that shows up the moment the status vocabulary is fixed:
+in-process rows carrying due dates for actions already taken **surface as false
+overdue as soon as they are correctly counted as live**. Do not resolve those by
+hand one at a time. Move each to the next rung of the ladder computed from the
+applied date, mechanically, and say in the digest that this is what happened.
 
 **Every row has a next action and a due date, or it is closed.** Rows with
 neither are where searches go quiet.
@@ -183,6 +252,11 @@ row to apply and lands somewhere else. Substituting a plausible URL for a missin
 one is the same error as inventing a metric for a CV - except that nobody thinks
 of a link as a claim.
 
+**A referenced file is a promise - check that it exists.** A row was added
+carrying the path to a role file that was never written, and it was discovered a
+day later when a status rewrite tried to open it. Any field holding a path gets
+checked at build time: every referenced file exists, or the row is flagged.
+
 **Two checks that catch it.** Run them whenever rows are added in bulk:
 
 1. **No two rows share a link.** A duplicate means one was copied from its
@@ -200,6 +274,14 @@ of a link as a claim.
    - an ATS tenant or company root with no job path - `<company>.myworkdayjobs.com/SITE`,
      `job-boards.greenhouse.io/<company>`, `jobs.ashbyhq.com/<company>`
 
+**Enforce all of this at build time, not by intention.** Despite this rule
+being written down, a row later shipped carrying a LinkedIn "view" URL labelled
+`PLACEHOLDER`. A rule that depends on someone remembering it is a rule with a
+known failure rate, so it is now a lint: warn on any link matching
+`linkedin.com/jobs/(search|view)`, on a bare board root, on anything containing
+`PLACEHOLDER`, and on a URL shared with another row. See
+`scripts/tracker_lint.py`.
+
 **Flag them visibly rather than dropping them.** A URL of the wrong shape is
 still a useful breadcrumb - it says where to go looking. What it must not do is
 present itself as the posting. Where the tracker can render, show these in a
@@ -211,8 +293,40 @@ trying to apply.
 Postings expire, so save the JD text alongside the link at capture time. A dead
 URL with the description saved is recoverable; a dead URL alone is not.
 
+**Verify the upload, not the upload's success message.** Re-staging a
+regenerated tracker under the same filename served the *previous* build back -
+same path, old row status - and publishing it would have silently reverted a
+live row to a state it had left days earlier. The guard is cheap: copy to a new
+filename before uploading, then **read back one field you know you just changed**
+and confirm it in the uploaded bytes. A tool reporting success is telling you
+the transfer completed, not that the bytes are the ones you wrote. This is the
+one-source-of-truth behaviour in `behaviours.md`, applied to the last step.
+
 **Never let the tracker become the work.** Five minutes a week of maintenance. If
 it is taking longer, columns are being tracked that no decision depends on.
+
+## The scan file is the unit of a sweep
+
+One dated file per discovery run, in a `scans/` folder alongside the tracker.
+Rows go into the tracker; everything else about the run goes here, and the
+structure that worked is:
+
+1. **Coverage** - which sources, which queries, how many rows returned, how many
+   read in full. Board totals from every deterministic read, per
+   `10-verification.md`.
+2. **Worth acting on** - ranked, and each one carrying *the single question that
+   decides it*.
+3. **Noted, not recommended** - with the reason, given once.
+4. **Resurfaced, already decided** - the archive earning its keep.
+5. **Screened out on the employer's own page** - with the reason, so nobody
+   re-reads them next week.
+6. **Dead** - with the positive control named.
+7. **Method notes** - what behaved differently from what this file says.
+8. **Not done tonight, deliberately.**
+
+The last section matters as much as the first. It is the "report what you did
+not cover" behaviour made structural, and it is the difference between "the
+market is quiet" and "I ran one of four sources".
 
 ## What to read out of it
 
