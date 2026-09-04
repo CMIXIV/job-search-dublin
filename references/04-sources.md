@@ -62,6 +62,13 @@ specific way:
 - **Close every tab opened this way once its listing has been read**, same as
   any other browser-automation task.
 
+**The default operation is one page read of the rendered results list, then
+verification on the employer's own board.** Opening the occasional card for a
+closer look is fine. Clicking through cards in bulk to harvest ids is not, and
+that - not reading a page - is the behaviour that gets accounts restricted. The
+account at risk is the person's, mid-search, which is the whole reason this line
+sits where it does.
+
 A real example from the search this skill was built from: for one person's
 roughly hundred-result weekly search, the full discovery pass - every page,
 every card's title and company and posting date - took a handful of batched
@@ -71,6 +78,14 @@ proportionally more effort than it returned; the same descriptions came back
 complete and reliable moments later, straight from the employer's own board,
 which is exactly where they needed to be read from anyway to verify the role
 was still live.
+
+**Find the saved search rather than asking for it.** On `linkedin.com/jobs/`
+the "Jobs based on your preferences" block carries a **"Show all" link whose
+href is the full preferences query** - keywords, `geoId`, origin. One DOM read
+gets it; append `distance=25&f_TPR=r86400&sortBy=DD` and that is the daily
+search, with no need for the person to paste anything. Reading the href has a
+second use: that query string is the only evidence of what the saved search
+currently contains, which matters two rules further down.
 
 **Build the search URL properly - plain keyword search under-returns badly.** A
 bare keyword search will hand back the same short, stale list run after run. The
@@ -90,6 +105,42 @@ cadence will therefore lose roles silently - not because the search is wrong but
 because the window moved. Tell the person this plainly and set the cadence
 accordingly: see `06-cadence-autonomy.md`.
 
+**The posted-age on a card is the repost age, and it must never lift a score.**
+Three cards presenting as hours old in one evening were requisitions first
+published seven months, ten weeks and six weeks earlier - one of them the
+person's own live application, re-promoted. The date that means anything is
+`first_published` on the employer's ATS, one read away. Freshness is read from
+the ATS, never from the feed; see the decay signals in `07-fit-scoring.md`.
+
+**Its work-mode tag disagrees with the employer's posting.** "On-site" on
+LinkedIn was "hybrid, at least half the month" on the same employer's Greenhouse
+page. That tag decides an office-days filter, so trust the employer's board over
+it, always.
+
+**Three junk classes fill the recommendations feed, and all three are visible
+from the list.** Eleven of twelve rows in one read fell into them:
+
+1. **Already decided** - reposts of rows the person archived weeks ago. This is
+   the archive earning its keep; triage against it first.
+2. **Aggregators and staffing accounts posting under their own name.** The tell
+   is one "employer" posting both an AI Product Manager and a Senior Accountant.
+   The employer is undisclosed, so the blind-submission rule below applies - skip
+   without reading.
+3. **The wrong function wearing a nearby title** - "ML Science Manager",
+   "Product Owner (UX)", "Product Engineer".
+
+Running the archive check and the employer-name test *before* opening anything
+removes most of a feed in about a minute.
+
+**A rule written in a file does not edit the saved search.** Terms that invite
+the wrong shape of role were flagged for deletion on one day and were still
+producing five off-target rows a scan five days later, because deleting them
+requires someone to open LinkedIn. When a scan shows a term is producing only
+noise, the action is *"the person edits the saved search today"*, and the next
+scan checks that the query string from the "Show all" href actually changed. A
+standing filter that only exists in the tracker screens roles after the search
+has already spent its budget finding them.
+
 **A local tech job board.** In Dublin that is **Built In Dublin**; most tech
 cities have an equivalent (Built In runs several, and there are strong local
 boards elsewhere). These are frequently underrated: no login, visible posting
@@ -100,9 +151,57 @@ produced the majority of live applications.
 Its weakness is the very top of the seniority band and non-local remote roles -
 exactly the gap LinkedIn fills. Run both; they are complementary, not ranked.
 
+Three things about how it behaves, each learned by getting it wrong first:
+
+- **Search by title, never by category.** The category pages tag by *company*,
+  not by role - an "artificial intelligence" category returns sales reps at AI
+  companies. Use `/jobs?search=<title>&daysSinceUpdated=<N>`, paged with
+  `&page=2`.
+- **Listing pages are `robots.txt`-disallowed to fetchers and read fine in the
+  person's own browser.** The same distinction as LinkedIn: a person reading a
+  page is not a crawler hitting an endpoint.
+- **One requisition fans out across every suburb.** A single Lead PM req came
+  back as eleven rows. Merge on company plus role before counting anything, or
+  the source reports several times the volume it actually found.
+
+Removed listings stay up - the same asymmetry the evidence tiers in
+`10-verification.md` are built on. Discovery here; verification on the board.
+
 **A cross-company ATS index.** `my.greenhouse.io` searches across every company
 using Greenhouse in one place, and Greenhouse postings more often carry published
 salary bands than anything else you will see. Smaller volume, high signal.
+
+Its location filter works only with this exact parameter set:
+
+    my.greenhouse.io/jobs/search?query=<title>&location=<City>%2C%20<Country>
+      &lat=<lat>&lon=<lon>&location_type=locality&country_short_name=<CC>
+
+or `location=<Country>&location_type=country` for a whole country. The names
+that look right - `latitude`, `longitude`, `locationType`, `country` - are
+**silently ignored and return global results**, which presents as a working
+search full of the wrong roles. Get the real values once by picking the city
+from the site's own autocomplete and copying the URL it produces, then save
+that URL and re-run it. A direct `fetch()` returns 406; navigate to it and read
+the DOM.
+
+**Two more, each with a specific failure mode.**
+
+*Remote-role aggregators* - `jobgether.com/search-offers?location=<country>&keyword=<title>`
+is the one this was learned on - are worth running on Principal and Staff titles
+only, where the volume is small enough to read whole. One such run surfaced a
+role the other three sources did not carry. Three caveats travel with it: the
+seniority classifier is unreliable (a Principal req tagged "Junior, 1-2 years"),
+the date sort ignores clicks, and "N days ago" is the aggregator's own re-index
+date, not the posting date. The employer is usually named; verify on their board
+before anything else.
+
+*Filtered boards that gate behind an account* - the former Otta, now
+`global.welcometothejungle.com`, is the current example, and note that the
+unprefixed `welcometothejungle.com` is a different product entirely. These carry
+published bands and good coverage, and **you may not create the account**. The
+person creates the profile; after that it is read exactly like LinkedIn, through
+their own signed-in session. Until they do, record it in the dead-ends list with
+that as the reason, so it is not re-investigated monthly.
 
 ## Tier 2 - verification and per-employer monitoring
 
@@ -188,7 +287,11 @@ Walk through this with the person, one line at a time. Tick items in
 3. `my.greenhouse.io`: account created, searches saved for each target title.
 4. Target-employer list: 10-20 companies named, each board found, alert set.
 5. Notice which sources need a login and get those created now, not at the moment
-   a deadline is closing.
+   a deadline is closing. Some boards cannot be read at all without one, and the
+   account is always theirs to create, never yours.
+6. Standing review of the saved search itself: when a scan shows a keyword is
+   producing only noise, the person edits the saved search that day, and the next
+   scan confirms the query string changed.
 
 ## Record the dead ends too
 
@@ -204,6 +307,14 @@ engineers across a continent while keeping product, design or leadership in one
 time zone. Check whether the *function* is hired there, not whether the company
 is present.
 
+**And an aggregator copy is not evidence the function is hired there either.**
+An aggregator carried a "Senior AI Product Manager, remote including Ireland"
+more than thirty days after it had left the employer's own board; the board
+itself - 227 requisitions, eight of them product roles as the positive control -
+had every product req in North America. That produces two things to write down,
+not one: the ghost listing, and the lane finding *"this employer does not hire
+product in this region right now"*. The second is the one that saves time later.
+
 Other dead ends worth recording: sources that return nothing at the target
 seniority, employers who never reply, and search lanes (a location, a work mode,
 a title) that produced zero live roles across several weeks. A lane that is
@@ -213,12 +324,11 @@ structurally empty is a finding, not a run of bad luck - say which one it is.
 
 - **LinkedIn job descriptions are gated.** Search result lists read fine; the
   descriptions frequently do not. Pull the JD from the company's own board.
-- **Cross-company ATS search needs its filters set exactly.** On
-  `my.greenhouse.io` the location filter only works with the full parameter set -
-  query, location, latitude, longitude, location type and country. Passing the
-  country alone is silently ignored and returns global results, which looks like
-  a working search full of the wrong roles. Check the first few hits are actually
-  in the target location before trusting a result set.
+- **Cross-company ATS search needs its filters set exactly** - see the parameter
+  set under the cross-company ATS index above, and check that the first few hits
+  are actually in the target location before trusting a result set. A location
+  filter that is silently ignored fails in the one direction nobody checks for:
+  it returns plenty of results.
 - **Signed-in sources persist.** Sources needing a login are worth the one-time
   setup; the session usually lasts, and they surface roles that appear nowhere
   else.
