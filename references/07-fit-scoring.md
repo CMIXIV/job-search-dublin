@@ -20,6 +20,12 @@ Name the gate and move on.
   sponsorship the employer will not provide
 - **Location** - "remote" often means remote-within-one-country for tax reasons.
   Check the practicals before spending an hour on the application
+- **Office attendance** - a *separate* gate from location, with its own number.
+  A role cleared "no attendance outside the home city" and still failed, because
+  it was five days a week in an office in that city. Where someone can be and
+  how often they must be there are different questions, and a tracker that
+  records only the first will keep passing roles that fail the second. Two
+  lines: geography, and days per week with a maximum
 - **Compensation floor** - if a published band sits below the phase 2 floor, out.
   No published band is not a gate; it is a question for the first call
 - **Deal-breakers** from phase 2 - industry, travel, on-call, management scope
@@ -55,9 +61,61 @@ prompted it is in front of them - the day rate floor, the salary that justifies
 the move, the conditions that make a lateral title acceptable. If they genuinely
 cannot answer yet, record that as an open item with a date, not as a filter.
 
+**A filter with the wrong axis is not a filter either.** The attendance gate
+above is the worked example: the filter existed, carried a number, and measured
+the wrong thing. When a role slips through a filter that was supposed to catch
+it, check the axis before adjusting the number.
+
+**Measure the comp floor on base, and know what it has to see through.**
+
+- **Total-target-cash bands** quoted as base plus a full bonus target, sometimes
+  with "100% variable" attached, are exactly the construction a base floor
+  exists to see through. Record them as *base unknown*, never as clearing.
+- **Contract day rates** convert to a salary equivalent before any comparison.
+  The day-rate floor is itself a derived number the person sets once, from the
+  base floor, their working days and a benefits loading.
+- **Employment through an employer of record** is employment - but it is a
+  first-call question wherever the person's right to work depends on continuity
+  with a direct employer.
+
+**A new filter is scoped against every open row before it is applied.** The
+first wording of one location filter, read literally, would have closed ten rows
+including live applications that were mid-process. It was held and put back to
+the person instead. Two parts:
+
+1. List which existing rows the proposed filter would close, then decide.
+2. **A filter never closes a live, in-process application retroactively.** Where
+   it would, stop and ask.
+
 For contract and day-rate roles specifically: the rate is a first-call question
 and never goes in an application. But the floor is agreed in advance, privately,
 so the first call is a check rather than a negotiation with themselves.
+
+## Read the accepted-backgrounds list before the responsibilities
+
+The most reliable tell of what a requisition actually is is the list of
+backgrounds the employer says it will accept. Titles are marketing and grades
+are internal taxonomy; that list is what the recruiter screens against.
+
+Three real examples, all decided by it alone:
+
+- *"PM, solutions engineering, implementation, TAM, CS engineering, sales
+  engineering, product ops"* - a mid-level customer-facing seat, whatever the
+  company's size and however AI-native it is.
+- *"Product Management, Digital Transformation, Business Transformation, Program
+  Management"* - an internal programme, not a product.
+- *"Software Engineering, Sales Engineering, Solutions Architecture"* under a
+  "Technical Product Manager" title tagged Entry level - not a product role.
+
+**Where the list disagrees with the title, believe the list.**
+
+The corollary fixes a filter that was firing too early: **a plain title is a
+prompt, not an automatic decline.** A level filter of "Senior and above" was
+challenged on the theory that at a small AI-native company a plain "Product
+Manager" covers senior scope. The description settled it - three-plus years, and
+an accepted-backgrounds list running to solutions engineering - but it settled
+it on evidence. A plain title is a prompt to go and read the years-of-experience
+bar and the accepted-backgrounds list. Those are evidence. The title is a signal.
 
 ## Three numbers
 
@@ -102,6 +160,45 @@ and record what changed.
 
 Where a whole week's list is cold-capped, that is the finding, not the roles. See
 `08-apply-and-followup.md`.
+
+## A confirmed band prices the grades below it
+
+Where an employer has **confirmed** a number for a known grade, every
+requisition at or below that grade in the same company can be priced without
+reading it. This saves real hours at employers that post constantly, so it is
+worth stating precisely enough to be safe.
+
+Three conditions, all required:
+
+1. The number is **employer-confirmed** - not a recruiter's signal, not an
+   aggregator's estimate, not a range from a salary site.
+2. The grade ordering is in **the company's own language**. "Senior Specialist
+   sits below Lead *here*" is an ordering. "Specialist sounds junior" is not.
+3. The requisition is **at or below** the confirmed grade.
+
+Two limits. It closes **unread rows only, never live ones**. And it is a
+judgement about a band, not about a company: it reverses the moment the band
+moves, and it never hardens into a blocklist.
+
+Where the ordering is not on file - a "Manager" title against a confirmed
+"Lead", say - the rule does not fire. Say that in the row rather than closing on
+an arithmetic that was never established.
+
+## A blocklist is a different mechanism from a filter
+
+Filters screen roles. A blocklist screens employers, and it exists because a
+company-level objection living only in role rows gets re-argued every time a new
+requisition appears - one employer surfaced six times in a fortnight and cost a
+triage pass each time.
+
+What earns a place on it: first-hand experience of the culture, or a fact about
+the employer that no requisition can change. Not a bad job description. Not one
+low band - that is what the band rule above is for.
+
+Evidence quality matters because the entry will be challenged, probably by the
+person, probably at the moment a good-looking role appears. And the entry is
+theirs to make: **candidates that fit the pattern are proposed, never added.**
+Make the case once, plainly, and let them decide.
 
 ## Decay signals - live is not the same question as winnable
 
@@ -154,6 +251,13 @@ Score it High, Medium or Low and make it a sort key alongside Priority. It is
 usually the fastest way to see that a pipeline full of 7s contains no roles the
 person would actually be excellent at.
 
+**One distinction the title will never show you.** "The thing they are best at
+*is* the product" is High. "The product is built on it, but the *work* is
+general craft on top" is Medium - product-led growth levers on an AI app builder
+is the worked example. The second reads exactly like the first from the title
+and the company description. **Score depth from what the role does, not from
+what the company sells.**
+
 If the High-depth list runs dry without an offer, that is a decision point, not a
 reason to drift - see `02-priorities.md`.
 
@@ -166,6 +270,23 @@ comparison after it is corrupted.
 Add a dimension instead. A preference that keeps recurring is a filter or a
 column, not a thumb on an existing scale. This is the single most useful scoring
 discipline to hold, and the easiest to break.
+
+Three kinds of pass, and none of them touches Fit:
+
+- **Declined on a filter.** Fit stays exactly where the description put it. A
+  role can be a 7 and declined on location; both facts are true and they belong
+  in different columns.
+- **Passed on the person's call with comp unknown and the timing wrong.** Leave
+  Fit unscored and say why. A number here reads to the next person as a
+  judgement on the role, and it was not one.
+- **Closed on the person's instruction rather than a rule.** Record it as *"on
+  the person's call, not on filter X"*. Otherwise a later reader assumes the
+  rule fired and applies it somewhere it does not belong.
+
+**And a correction is recorded as a correction.** *"This score is a correction -
+the sweep called it the strongest fit on the title; reading the description
+contradicts that."* Never quietly overwritten. A score that only ever moves up
+is decoration, and a revision nobody can see teaches nothing.
 
 ## What the numbers mean
 
@@ -202,6 +323,10 @@ A score that only ever moves up is not a score.
 - **Several near-identical reqs at one employer** means reqs are being opened and
   closed quickly. Check whether the others are still open before assuming one
   rejection closed the door.
+- **Four near-identical remote reqs across fifteen countries is application
+  farming, not four hires.** Treat comp and seriousness as open questions before
+  any effort goes in, and cut Probability on every twin. The location-twin rule
+  in `10-verification.md` covers the verification half of this.
 - **Several *different* roles at one employer in a short window** is a hiring
   cluster - a team being built by someone with budget right now. Score it as one
   opportunity entered through a single conversation, not three applications. See
