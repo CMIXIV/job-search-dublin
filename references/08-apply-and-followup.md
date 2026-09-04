@@ -62,6 +62,26 @@ More templates in `templates/outreach-templates.md`, including cold outreach to
 hiring managers, reconnecting with dormant contacts, and the message to a
 recruiter who reached out months ago.
 
+**A LinkedIn invitation note is 200 characters, and the count is measured, not
+estimated.** The limit was carried in this skill as 300 and two drafts - one of
+590 characters, one of 298 - were written before the person caught it. Both
+would have failed silently at the keyboard, at the moment they were pasting a
+message to somebody who mattered. So: **count every invitation note
+programmatically before it leaves the folder, and put the count in the
+heading.**
+
+The second-order rule is the useful one. **An approach that needs more than 200
+characters is two messages, not one long one.** Version A buys the connection:
+the warm signal, the application named once, one credential, and an ask that
+costs nothing to accept. Version B carries the substance and goes after the
+connection is accepted, where nothing is capped. Both are in
+`templates/outreach-templates.md`.
+
+One thing worth checking on LinkedIn's own help pages rather than from memory,
+because it changes the strategy rather than the wording: whether free accounts
+also cap *personalised* invitations per month. If they do, notes get spent on the
+warmest targets rather than the most overdue ones.
+
 ## Telling people you are looking
 
 A redundancy is one of the few moments when asking for help is socially
@@ -81,6 +101,21 @@ Fixed, and it ends. Most searches leak time into applications that died weeks ag
 **Day 10.** One chase, to the recruiter or hiring manager if a name is available.
 Restate interest in one line, add one new piece of evidence, ask about timelines.
 Never simply "checking in" - a chase with nothing in it is worse than silence.
+
+**On a cold application, day 10 is a search, not a message.** An aggregator or a
+bare ATS - Greenhouse, Workday, iCIMS, Jobvite - leaves no reply-to address, so
+the chase as written cannot be executed at all. What day 10 means there is: find
+a named human, the hiring manager or the product leader who owns the
+requisition, and open a conversation. Agencies and named recruiters are the
+exception, and there you chase the person.
+
+The corollary reframes the whole pipeline, so it is worth saying flatly: **an
+application submitted with no human attached was never capable of producing a
+reply.** Attribution across three weeks of a real search was unambiguous - every
+process that reached an interview had a human on it, and none came from a cold
+application alone. That is not an argument for chasing harder. It is an argument
+for attaching a human before the application, which is what the cold-only
+Probability cap in `07-fit-scoring.md` is trying to make visible.
 
 **Day 21.** No reply after that chase means the application alone will not land
 it. Escalate: find a referral, or approach the hiring manager directly. If
@@ -175,6 +210,47 @@ will draw the wrong lesson when the messages stop. **And the window is short** -
 inbound decays as the news goes stale, usually within weeks. While it is open,
 answer everything quickly and convert it into conversations, because that is the
 cheapest warm route they will get all search.
+
+The caution above is about *attribution*, and it holds. The *quality* of inbound
+is a separate observation and it held up: three inbound approaches in three days
+beat a full morning of cold scanning that produced one live role, and both roles
+capable of moving the person's level arrived inbound. That does not license
+drawing a line from "I updated my CV" to "my profile is heating up". It does
+mean the ordering is settled regardless of cause - answer inbound first, cold
+scanning second.
+
+## Ask the one question before disclosing anything
+
+A warm inbound arrives for a well-matched role based in another country. The
+right reply is one question - *"is there a remote-from-<country> or equivalent
+seat for this?"* - and nothing at all about the person's own constraints.
+
+If the answer is no, the conversation ends there and nothing needed disclosing.
+If it is yes, the practicalities are handled at screening, in whatever standing
+form the process uses. Volunteering a constraint before knowing whether it is
+even in play spends something for nothing, and it is unrecoverable once said.
+
+Keep the recruiter either way. Thank them, hand them the spec of what the person
+is looking for, and leave the door open - a recruiter who now knows the target
+is worth more than one who got a polite decline.
+
+**And no agency role proceeds until the client is named - before the description
+is even scored.** `04-sources.md` states this for CV submission. It extends
+earlier than that, because a blind submission is the single route by which a
+blocklisted employer, or the person's own current employer, gets reached by
+accident. A sector named without a client is not a named client.
+
+## Nothing goes on a slide in the agent's phrasing
+
+A panel asked the person what two terms on his own deck meant. Both were this
+agent's words, not his. When somebody is asked to unpack a phrase they did not
+write, there is a half-beat of translation before they answer, and a panel
+feels it even when it cannot name what it felt.
+
+**Every term in an artefact the person will present live is one they would use
+unprompted, or it gets rewritten in their words.** Documents they submit and do
+not defend in the room are different - density is fine there. The second-order
+consequence is worth taking: fewer slides.
 
 ## Interviews and offers
 

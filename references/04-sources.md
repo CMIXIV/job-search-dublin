@@ -237,8 +237,10 @@ identifiable - paste a distinctive sentence into a search and the employer's own
 posting frequently appears. Applying direct is better than applying through an
 intermediary who takes a fee and controls the timeline.
 
-**Never let an agency submit a CV before they name the client.** This is the rule
-that protects the person, and in Ireland it has legal and code-of-practice force -
+**Never let an agency submit a CV before they name the client** - and in practice
+the line sits earlier than submission: no agency role is scored, tailored for or
+answered on rate until the client is named. A sector named without a client is
+not a named client. This is the rule that protects the person, and in Ireland it has legal and code-of-practice force -
 see `09-ireland-redundancy.md`. Blind submission risks the CV landing at their
 current employer, at a company where they already have a live application, or at
 one they have deliberately ruled out. It also creates duplicate-candidate

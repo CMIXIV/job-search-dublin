@@ -37,6 +37,35 @@ Send it *before or alongside* the application, not two weeks after.
 >
 > Would be good to catch up regardless.
 
+## LinkedIn invitation - the 200-character version
+
+A LinkedIn invitation note is capped at **200 characters**, and the cap is
+enforced silently at the keyboard: a longer note simply will not send. Count it,
+do not estimate it - `python3 -c "print(len(open('note.txt').read().strip()))"` -
+and put the count in the heading of whatever file the draft lives in.
+
+Anything that needs more than 200 characters is two messages. Version A buys the
+connection; version B carries the substance once it is accepted.
+
+**Version A - the invitation (must fit 200).** Warm signal, the application named
+once, one credential, an ask that costs nothing.
+
+> Hi [name] - applied for the [role] this week. Spent [N] years doing [the one
+> thing] at [employer]. Would value being connected either way.
+
+**Version B - after they accept (no limit).**
+
+> Thanks for connecting. I applied for the [role] on [date] - the part that stood
+> out was [specific thing from the JD], and the closest thing I've done is [one
+> outcome, one number].
+>
+> If it's useful I can send a short note on how I'd approach [the specific
+> thing]. And if it's not the right fit, I'd still welcome the connection.
+
+Worth checking on LinkedIn's own help pages, not from memory: free accounts may
+also cap *personalised* invitations per month. If they do, spend the notes on the
+warmest targets rather than the most overdue ones.
+
 ## Cold outreach to a hiring manager
 
 Use after applying, when the manager can be identified and the role matters.
