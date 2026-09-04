@@ -31,6 +31,13 @@ five minutes - open the saved filtered search, skim, log anything worth scoring.
 person can only manage one rhythm, make discovery the automated one, since it is
 the part that decays without attention.
 
+**The 24-hour window is the daily instrument, and the preferences search is the
+query.** Not a fresh keyword search each time - the saved preferences query, read
+from the jobs home page, with the last-24-hours filter and a date sort appended.
+See `04-sources.md`. The secondary keyword searches are where off-target noise
+now accumulates, so run them as optional, and triage them against the archive and
+the employer-name test before opening anything.
+
 **Warn about the volume trap.** Response rates for cold applications are low
 everywhere, so people rationally increase volume - and volume degrades tailoring,
 which lowers the response rate further. The escape is not more applications; it
@@ -129,6 +136,13 @@ roles, updates the tracker, and delivers the digest. Include in it:
 
 - **The three things to do next, named as actions, in order** - the first thing
   in the digest, before any counts or lists. See `05-tracker.md`
+- **The one question per candidate role, ahead of its score.** A digest that
+  opens with numbers invites the person to agree with the ranking. A digest that
+  opens with *"this turns on whether the Dublin seat is real - only they can
+  answer"* gets the answer. Where a row turns on a question only the person or
+  the employer can settle, **it is not scored into the tracker until it is
+  answered** - it waits in the scan file. Adding unscored rows to the board is
+  exactly how rows age quietly
 - **Which sources were actually run**, named, and which were not
 - **How deeply each was covered** - roles read in full versus seen at headline
   level only. "Ten postings seen on the board, none opened" is a materially
@@ -144,6 +158,18 @@ roles, updates the tracker, and delivers the digest. Include in it:
 - Applications with a next action due this week
 - Applications with no response past the follow-up threshold
 - One honest line on how the week went against the target
+
+**Every sweep names its totals.** Rows returned per source, rows read in full,
+and the board total from every deterministic read - see `10-verification.md`,
+where a count that disagrees with the previous read of the same board is the only
+signal that a read truncated. Totals that are not stated cannot be compared, and
+the comparison is the check.
+
+**And every sweep ends with what was deliberately not done.** Not as an apology -
+as a section. It is the "report what you did not cover" behaviour made
+structural, and it is the difference between "the market is quiet" and "I ran one
+of four sources". The scan-file structure in `05-tracker.md` puts it last on
+purpose.
 
 **Deduplicate against the tracker, not against the last digest.** Scheduled tasks
 sometimes fire twice in a day, and a second pass will happily re-surface roles
