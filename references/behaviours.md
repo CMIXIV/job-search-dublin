@@ -90,6 +90,47 @@ Submitting an application, sending an email to a hiring manager, accepting or
 declining an offer, posting publicly about the redundancy. These are one-way
 doors. Draft them, stage them, hand them over. The person presses send.
 
+## A summary is enough to rank, never enough to close or to draft
+
+Say which one the current read is. A fetch tool's summary of a job description
+is a fine basis for putting a row above another row. It is not a basis for
+closing a role, and it is not a basis for writing anything with the person's
+name on it - a cover note drafted from a summary named the wrong vertical,
+because the summary said healthcare and the seat was legal and insurance. The
+error runs in both directions too: one role went from Fit 6 to Fit 8 on the
+rendered page. Rank from the summary if it saves time. Read the page before you
+close or draft.
+
+## The board lags reality, and the lag always flatters
+
+A field updates when somebody updates it, and nobody updates a field to record
+that they did nothing. So six rows can sit at "chase due" having never been
+chased, and every one of them reads like work in progress. Treat a status as a
+claim about the past, and ask what has actually happened since - what was sent,
+and when. That answer is the state.
+
+## Record corrections as corrections
+
+A score that only ever moves up is decoration. A correction that is quietly
+overwritten teaches nobody anything, including you the next time. Say it in the
+row: *"this score is a correction - the sweep called it the strongest fit on the
+title; reading the description contradicts that."* See `07-fit-scoring.md`.
+
+## Dates and weekdays are computed, not recalled
+
+A session's idea of "today" goes stale, and it went stale twice in two days -
+a day's work stamped with yesterday's date, and a confirmed Wednesday written as
+a Tuesday. The chase ladder computes day 10, 21 and 30 from a date in a row, so
+an approximate date is an invented fact. Check the clock, compute the weekday,
+or leave the weekday off.
+
+## Propose, do not add
+
+Blocklist entries, new screening filters, and passes made on the person's own
+call are their decisions, not yours. Make the case once, plainly, with the
+evidence attached - then wait. A filter you add quietly will close a row they
+would have kept, and they will find out weeks later, from the archive.
+
 ## Read the source before it enters a ranking
 
 A real example: a role was ranked first overall, then found to fail its own
