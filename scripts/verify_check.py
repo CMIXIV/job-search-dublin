@@ -19,10 +19,21 @@ Two kinds of fixture:
     exists. These test real network behaviour: a real single-record lookup,
     a real listing, a real wrong-token 404.
 
-  - LOCAL fixtures (assertions 4, 6, 7, 8) are recorded payloads, not live
-    calls. They exist to pin down structural cases - a truncated listing, an
-    emitter that closes everything, an evergreen requisition id - that a
-    live public board cannot be relied on to keep reproducing on demand.
+  - LOCAL fixtures (assertions 4, 6-12) are recorded payloads, not live
+    calls. They exist to pin down structural cases - a truncated listing, a
+    summarising read, a partial Ashby board, an emitter that closes
+    everything, a location twin, an evergreen requisition id - that a live
+    public board cannot be relied on to keep reproducing on demand.
+
+A note on how the real reads are meant to be made, because it is the thing
+these fixtures are protecting. A board listing settles liveness only when it
+is read deterministically: navigate a browser to the API URL, parse the body,
+filter in code. A summarising fetch tool reported "164 jobs, id not present"
+on a board that held 309 and did contain the id - it did not fail, it
+summarised, and a summary of a list is not a list. Greenhouse's /jobs also
+truncates past roughly 300 requisitions, so use ?content=false or the
+per-office and per-department endpoints on large boards. The fetch tool is
+for ranking; it never closes a role. See references/10-verification.md.
 
 Fixture rot. The live fixtures will eventually break: a job closes, a board
 gets renamed, an API shape changes. That is expected and is not a reason to
@@ -122,12 +133,22 @@ def verdict(found, control_ids):
     return "UNVERIFIED"
 
 
-def verdict_from_listing(target_id, records_read, declared_total):
-    """references/10-verification.md 1.3: a not-found result from a listing is
-    UNVERIFIED unless the listing can be shown complete (declared total matches
-    records actually read)."""
+def verdict_from_listing(target_id, records_read, declared_total,
+                         deterministic=True):
+    """references/10-verification.md 1.3 and the summarising-read rule: a
+    not-found result from a listing is UNVERIFIED unless the listing can be
+    shown complete (declared total matches records actually read) *and* the
+    read was deterministic.
+
+    deterministic=False means the listing came back through a tool that
+    summarises - which is free to report a total it did not count. Such a read
+    can establish LIVE (a record it did surface is a record that exists) but
+    can never establish absence, whatever total it claims.
+    """
     if target_id in records_read:
         return "LIVE"
+    if not deterministic:
+        return "UNVERIFIED"
     complete = declared_total is not None and declared_total == len(records_read)
     return "GONE" if complete else "UNVERIFIED"
 
@@ -136,6 +157,28 @@ def tier_b_is_trusted(source_history):
     """references/10-verification.md 1.6: a source that has claimed closure on
     a requisition Tier A confirms live is an unreliable emitter."""
     return not source_history.get("claimed_closed_on_a_tier_a_live_id", False)
+
+
+def effective_tier(claimed_tier, source, false_emitters):
+    """A closure statement is Tier B only from a source not on the confirmed
+    false-emitter list. From a listed emitter it is Tier C, which settles
+    nothing - including when the emitter is the employer's own careers site.
+    Each entry on that list carries the control that proved it."""
+    if claimed_tier == "B" and source in false_emitters:
+        return "C"
+    return claimed_tier
+
+
+def location_verdict(tag_city, body_city, twin_count):
+    """The location-twins rule: a location tag is a claim, not a fact. Where a
+    requisition exists as several location twins, or where the description body
+    names a different city from the tag, the location is UNVERIFIED until the
+    employer answers - and the twins count as one hire, not N."""
+    if body_city and tag_city and body_city.strip().lower() != tag_city.strip().lower():
+        return "UNVERIFIED"
+    if twin_count > 1:
+        return "UNVERIFIED"
+    return "LIVE"
 
 
 def verdict_with_tiers(tier_a_verdict, tier_b_claims_closed, source_history):
@@ -257,6 +300,65 @@ def run():
         f"tier_b_is_trusted(...) = {tier_b_is_trusted(unreliable_source)!r}, expected False.",
     )
 
+    summarised_verdict = verdict_from_listing(
+        target_id="req-12345",
+        records_read=[f"rec-{i}" for i in range(164)],
+        declared_total=164,
+        deterministic=False,
+    )
+    check(
+        "8. a summarising read reporting a self-consistent total yields "
+        "UNVERIFIED, never GONE",
+        "10-verification.md, a summary is not a read",
+        summarised_verdict == "UNVERIFIED",
+        f"verdict_from_listing(deterministic=False) = {summarised_verdict!r}, "
+        "expected UNVERIFIED. A tool that summarises can report a total it did "
+        "not count - 164 was reported on a board holding 309 - so its total "
+        "matching its own record count proves nothing.",
+    )
+
+    ashby_verdict = verdict_from_listing(
+        target_id="req-not-in-the-partial-payload",
+        records_read=[f"ashby-{i}" for i in range(8)],
+        declared_total=37,          # what the rendered board showed
+    )
+    check(
+        "9. an id absent from the partial-Ashby fixture yields UNVERIFIED, "
+        "never GONE",
+        "10-verification.md, listings known to come back partial",
+        ashby_verdict == "UNVERIFIED",
+        f"verdict_from_listing(...) = {ashby_verdict!r}, expected UNVERIFIED "
+        "(8 records against a rendered board of 37 is a partial listing, and "
+        "Ashby's posting API returns these intermittently).",
+    )
+
+    twin_location = location_verdict(
+        tag_city="Dublin",
+        body_city="Berlin",        # the description body names a different city
+        twin_count=3,
+    )
+    check(
+        "10. a location twin whose description body names a different city "
+        "yields an UNVERIFIED location",
+        "10-verification.md, location tags are claims",
+        twin_location == "UNVERIFIED",
+        f"location_verdict(...) = {twin_location!r}, expected UNVERIFIED. A "
+        "location tag must not clear a location filter on its own where the "
+        "body names another city, and N twins are one hire.",
+    )
+
+    false_emitters = {"employer-careers-site"}
+    demoted = effective_tier("B", "employer-careers-site", false_emitters)
+    kept = effective_tier("B", "some-other-board", false_emitters)
+    check(
+        "11. a closure statement from a listed false emitter is demoted to "
+        "Tier C, and one from an unlisted source is not",
+        "1.6 / confirmed false-emitter list",
+        demoted == "C" and kept == "B",
+        f"effective_tier(listed) = {demoted!r} (want C); "
+        f"effective_tier(unlisted) = {kept!r} (want B).",
+    )
+
     evergreen_role = {
         "fit": 8,
         "probability": 7,
@@ -266,7 +368,7 @@ def run():
     }
     fit_out, probability_out, reasons = apply_decay(evergreen_role)
     check(
-        "8. a fixture carrying an evergreen requisition id produces a Probability "
+        "12. a fixture carrying an evergreen requisition id produces a Probability "
         "penalty and leaves Fit unchanged (D5)",
         "07-fit-scoring.md decay section",
         fit_out == evergreen_role["fit"] and probability_out < evergreen_role["probability"] and reasons,
@@ -277,9 +379,9 @@ def run():
 
     print()
     if FAILURES:
-        print(f"{len(FAILURES)} of 8 checks failed: {', '.join(FAILURES)}")
+        print(f"{len(FAILURES)} of 12 checks failed: {', '.join(FAILURES)}")
         return 1
-    print("8 of 8 checks passed.")
+    print("12 of 12 checks passed.")
     return 0
 
 
