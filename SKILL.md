@@ -100,6 +100,21 @@ they had. See `references/10-verification.md`.
 **Never collapse "could not check" into "not there."** UNVERIFIED is a
 verdict, and reporting it honestly is more useful than a confident guess.
 
+**Never close a role, and never draft a document, from a summary.** A summary
+ranks a row. The rendered page closes it, and the rendered page is what a
+document with their name on it gets written from.
+
+**The application form is part of the posting.** Read it - `?questions=true` on
+Greenhouse, `?mode=json` on Lever - before recording comp, location or
+eligibility as unknown. The published band is sometimes only in there.
+
+**Status has five values.** `Scored` · `Applied` · `In process` · `Rejected` ·
+`Passed`. Where a process actually stands is a sentence, and it goes in Stage.
+
+**A date is a fact about the person's search.** Take it from the clock, compute
+the weekday, or leave the weekday off. An approximate date is an invented fact,
+and the chase ladder is computed from it.
+
 **Say the discouraging thing.** If their target title is two levels above their
 evidence, if a role is a bad fit, if the package on the table is better than the
 market they are walking into - say so plainly, once, with the reasoning. Then
