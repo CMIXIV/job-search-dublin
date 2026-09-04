@@ -3,6 +3,37 @@
 Dates are release-tag dates. Each entry is a summary of the tagged commit;
 see git history for the full message.
 
+## v1.5.0 - 2026-09-04
+
+Liveness-and-state release. Two weeks of daily runs against a real
+pipeline exposed a second failure class after v1.4.0's: not "is this role
+dead" but "is it fresh, what is it, and where does the process stand". A
+summarising fetch reported a third of a board and emitted confident false
+GONEs; the feed's posted-age turned out to be the repost age; the
+accepted-backgrounds list, not the title, said what a requisition was;
+the published band lived in the application form rather than the
+description; and seventeen bespoke status strings put the nine most
+important rows in the wrong bucket.
+
+Adds deterministic board reads with reported totals, a false-emitter list
+carrying the control that proved each entry, location twins, and
+form-as-posting to `10-verification.md`. Adds the accepted-backgrounds
+tell, the attendance-days axis, a confirmed band pricing the grades below
+it, the blocklist mechanism and pass-without-rescoring to
+`07-fit-scoring.md`. Adds a five-value Status with a Stage column,
+masthead-in-the-same-pass, file-field and link lint, and clock-sourced
+dates to `05-tracker.md` and `make_tracker.py`. Adds day-10-is-a-search,
+the 200-character invitation rule and "nothing on a slide in the agent's
+words" to `08-apply-and-followup.md`. Rewrites the LinkedIn section of
+`04-sources.md` for a signed-in browser session and corrects the
+cross-company Greenhouse location parameters, which were documented
+wrongly and failed by returning plausible global results.
+
+Adds `scripts/tracker_lint.py` - non-canonical status, `In process` with
+no stage, missing referenced files, placeholder and duplicated links,
+silently overdue live rows, a masthead not dated today. Takes
+`verify_check.py` from eight assertions to twelve.
+
 ## v1.4.0 - 2026-08-21
 
 Verification-correctness release. A live run against a real pipeline exposed
