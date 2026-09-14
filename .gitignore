@@ -1,8 +1,18 @@
 # Never commit anyone's job search data.
+#
+# The extension list below is not enough on its own: a real working folder
+# turned out to hold rate assessments, take-home briefs and reply drafts as
+# plain .md, all of them naming real employers, and 'git add -A' would have
+# swept every one of them in. Ignore the working directories by name as well.
 job-search/
+Claude outputs/
+scans/
+applications/
 *.pdf
 *.docx
+*.pptx
 *.xlsx
+*.csv
 !templates/*.docx
 .DS_Store
 __pycache__/

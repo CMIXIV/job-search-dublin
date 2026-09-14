@@ -129,13 +129,13 @@ least appetite for it. Naming three collapses that into a decision they can act
 on in the next hour.
 
     THIS WEEK — updated 20 Aug
-    1. Brightflag — prep the MCP answer before Thursday's call
-    2. Mastercard — ask Sinead for the referral, application is 9 days cold
-    3. Marsh cluster — one message to the hiring manager, not three applications
+    1. [Employer A] — prep the answer on their core platform before Thursday's call
+    2. [Employer B] — ask [contact] for the referral, application is 9 days cold
+    3. [Employer C] cluster — one message to the hiring manager, not three applications
 
 Three rules make it worth having:
 
-**Name actions, not roles.** "Brightflag, priority 9.5" tells them nothing they
+**Name actions, not roles.** "[Employer A], priority 9.5" tells them nothing they
 did not already know. The action is the deliverable.
 
 **Date it and regenerate it whenever the tracker changes.** A header telling
