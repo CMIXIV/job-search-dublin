@@ -13,14 +13,39 @@
 
 ## Cover notes
 
-Short. Three paragraphs, under 200 words, in the person's voice - not a formal
-register they would never use in a meeting.
+In the person's voice - not a formal register they would never use in a meeting.
+
+**Length follows from the job the note has to do**, and the job is three things:
 
 - **Why this role, specifically.** One detail from the JD that a generic note
   could not contain. If nothing in the JD is specific enough to reference, that
   is information about the role.
 - **The single strongest proof** that they can do the job, with its number.
 - **What they want next**, in a sentence, and a plain closing.
+
+The test is not a word count. It is that **no paragraph is in there without work
+to do**: cut the one that is only being polite, the one restating the CV, and
+the one explaining why they are on the market. What survives is the length the
+note should be.
+
+**What that has actually measured.** Across eleven notes sent in one search, the
+median was **428 words** and the spread **267-542**. None came close to 200. The
+container drives the length more than the role does:
+
+- **A formal uploaded document** - a note attached as its own file - runs
+  **291-362**. The frame does some of the work, so the prose carries less.
+- **A paste-in note** - a form's free-text box, or the body of an email - runs
+  **406-542**. There is no letterhead doing the introducing, so the first
+  paragraph has to.
+
+That split accounts for ten of the eleven; the shortest note in the sample sits
+below the document band.
+
+**This is one person, one search, n=11.** It is a calibration, not a rule -
+enough to say that a note landing near 400 words is normal rather than bloated,
+and not enough to make 428 a target. What the numbers are actually for is
+retiring the figure they replaced: "under 200 words" shipped here for nine
+tagged releases and was never once true of a note this skill produced.
 
 Never open with "I am writing to apply for". Never explain the redundancy in a
 cover note - it is neutral information for a screen conversation, not a lead.
