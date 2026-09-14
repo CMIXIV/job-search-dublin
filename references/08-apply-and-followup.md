@@ -29,23 +29,29 @@ the one explaining why they are on the market. What survives is the length the
 note should be.
 
 **What that has actually measured.** Across eleven notes sent in one search, the
-median was **428 words** and the spread **267-542**. None came close to 200. The
-container drives the length more than the role does:
+median was **428 words** and the spread **267-542**. None came close to 200.
 
-- **A formal uploaded document** - a note attached as its own file - runs
-  **291-362**. The frame does some of the work, so the prose carries less.
-- **A paste-in note** - a form's free-text box, or the body of an email - runs
-  **406-542**. There is no letterhead doing the introducing, so the first
-  paragraph has to.
+Split by container, the sample looks like this - and the way it fails to
+separate is the more useful half of the finding:
 
-That split accounts for ten of the eleven; the shortest note in the sample sits
-below the document band.
+- **A formal uploaded document**, attached as its own file - **291-362**,
+  median 347, n=3.
+- **A paste-in note**, in a form's free-text box or the body of an email -
+  **267-542**, median 468, n=8.
 
-**This is one person, one search, n=11.** It is a calibration, not a rule -
-enough to say that a note landing near 400 words is normal rather than bloated,
-and not enough to make 428 a target. What the numbers are actually for is
-retiring the figure they replaced: "under 200 words" shipped here for nine
-tagged releases and was never once true of a note this skill produced.
+**The document band sits entirely inside the paste-in band.** So the container
+does not predict the length. A first cut of this said it did, on a split that
+put the shortest note in the wrong bucket; corrected, the medians still differ
+by about 120 words, but three documents against eight paste-ins with complete
+overlap will not carry a claim about cause. What the container appears to
+change is *spread* - the paste-in notes range over 275 words, the documents over
+71 - and even that is three observations.
+
+**So use the overall number, not the split.** One person, one search, n=11: a
+note landing near 400 words is normal rather than bloated, and 428 is not a
+target. What the numbers are actually for is retiring the figure they replaced:
+"under 200 words" shipped here for nine tagged releases and was never once true
+of a note this skill produced.
 
 Never open with "I am writing to apply for". Never explain the redundancy in a
 cover note - it is neutral information for a screen conversation, not a lead.
