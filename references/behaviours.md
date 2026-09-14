@@ -168,6 +168,23 @@ primary source is cheaply reachable, read it before recommending, not after
 being challenged on it. A ranking built on a summary is a guess wearing a
 ranking's clothing.
 
+## A rank number is not a stable identifier
+
+When a tracker re-ranks rows on every rebuild - non-closed rows first by
+priority, closed rows last - a row's displayed number shifts whenever anything
+is added or removed, even for rows nobody touched. If someone refers to
+several roles by rank number in one message, especially a batch that also
+includes removals, restate each one as company + role from the current data
+before acting, rather than trusting the numbers still point where they did
+when the person last looked.
+
+A real example from the search this skill was built from: a single request
+removed four roles by rank number alone, and that removal shifted the rank of
+every other row in the tracker, including live and closed rows nobody had
+asked to touch. Confirming company + role against each number first is what
+makes a batch like that safe to execute without stopping to ask a clarifying
+question for every row in it.
+
 ## One source of truth, and know which direction data flows
 
 A real example: a generator script rebuilt the canonical dataset from a stale
@@ -189,3 +206,14 @@ caused it, what has changed so it cannot recur, and correct the record -
 before continuing with anything else. Do not fold the correction into a
 summary where it can be missed. A correction that is easy to miss is not a
 correction.
+
+## Verify a specific claim before it ships
+
+A cover note, prep document, or outreach message sometimes includes a
+specific, checkable factual claim about a tool, company, or person - who built
+something, what license it carries, who is credited for it. Check that claim
+against its actual primary source directly before it goes out, rather than
+inferring it from a secondary mention or a plausible-sounding pattern. A small
+wrong detail like that is worse in a document meant to demonstrate care than a
+vaguer, correct sentence would have been, because it is exactly the kind of
+thing a careful reader checks.
