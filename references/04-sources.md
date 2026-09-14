@@ -217,6 +217,49 @@ reliable, and better than anything you could build for that number of companies.
 **Ashby, Lever, Greenhouse boards, Personio, SmartRecruiters.** Same pattern:
 find the target employer's board, apply there, set an alert if offered.
 
+### The ATS you have not heard of is where the locally-founded companies are
+
+A sweep built on Greenhouse and Ashby alone is not lightly biased. It is
+**structurally blind to a whole class of employer**, and the class it misses is
+often the one that fits best: companies founded in the person's own city, at the
+size where a senior product hire is a real job rather than a line in a global org
+chart.
+
+A run that read thirty-one Greenhouse and Ashby boards across two weeks produced
+four unseen names. One afternoon spent finding the boards of locally-founded
+companies produced fifteen new tokens across six other systems, and one of them
+was a role worth applying to the same day. That role had been open for a fortnight
+and was invisible to every previous sweep - not because it was new, and not
+because the market was thin, but because of which ATS the company had bought.
+
+Token and URL patterns worth trying on any employer whose board you cannot find:
+
+| System | Read it at |
+|---|---|
+| Personio | `<token>.jobs.personio.com` |
+| Workable | `apply.workable.com/api/v1/widget/accounts/<token>?details=true` |
+| Teamtailor | `<token>.teamtailor.com/jobs` - the token often carries a numeric suffix |
+| JazzHR | `<token>.applytojob.com` |
+| HireHive | `<token>.hirehive.com` |
+| Recruitee | `<token>.recruitee.com` |
+| Greenhouse, EU host | `job-boards.eu.greenhouse.io/<token>` |
+| Lever, EU host | `jobs.eu.lever.co/<token>` |
+
+**The EU hosts are separate namespaces.** A token that 404s on
+`job-boards.greenhouse.io` can be live on `job-boards.eu.greenhouse.io`, and the
+same holds for Lever. Check both before recording a board as absent.
+
+**On Ashby specifically: the token is the company name, not the slug.** A board
+recorded as non-existent for seventeen days - two guessed slugs, both 404 - was
+live the whole time under the company's name with its real spacing and
+capitalisation, URL-encoded. Try that form before concluding a company has no
+Ashby board.
+
+**Build the list from where such companies are catalogued**, not from job boards:
+national startup-ecosystem databases, accelerator and incubator portfolios, and
+the funding coverage below. Twenty local companies with working tokens is a better
+week's work than another pass over the same global feeds.
+
 **A target-employer list is itself a source.** Twenty companies the person would
 actually join, monitored directly, will out-perform passive browsing - especially
 for roles that get filled before they are widely posted.
@@ -295,6 +338,56 @@ Walk through this with the person, one line at a time. Tick items in
    producing only noise, the person edits the saved search that day, and the next
    scan confirms the query string changed.
 
+## Funding and jobs announcements - the one source that gets you there early
+
+Every source above shows roles that already exist, which means competing with
+everyone else who can read. Funding coverage shows employers **before the
+requisition**, and that is the only channel where a conversation can start with no
+queue in front of it.
+
+A company that closed a round this month will be hiring in six to ten weeks. A
+company that announced it is opening an office in the person's city, or tripling
+headcount, has roles that are decided but unwritten. Reaching the founder or the
+hiring lead at that point is a different conversation from applying.
+
+**Where to read it:** the national tech-press outlet (every country has one, and
+it is usually the highest-yield single source), pan-regional startup press, the
+inward-investment agency's press releases, and the state enterprise agency's
+announcements. Filter to companies in the person's domain with a real presence in
+the target location.
+
+**Two cautions.** Local press coverage is not evidence of a local function - one
+company covered repeatedly as a local growth story had its whole product
+organisation in another country, visible on its own board in one read. And an
+announced round is not an open role: the approach has to offer something, not ask
+for a vacancy that does not exist yet.
+
+## Sources tested and found not worth re-running
+
+Record these with the same weight as the dead ends below, because they look
+plausible and they cost hours.
+
+**Venture-capital portfolio job boards.** The pitch is right - one searchable
+board across every portfolio company's ATS, weighted to funded employers. The
+execution mostly is not. Of twelve boards tested in one pass, **one** applied a
+location filter server-side; six ignored their own location and keyword filters
+and returned the full unfiltered list whatever was passed; four rendered nothing
+without a real browser; and one investor advertised a portfolio board that did not
+exist. The one board that worked returned only roles already tracked.
+
+If it is ever retried: the common platform encodes filters as base64 JSON in a
+`filter=` query parameter, pagination is client-side so only the first page of any
+search is visible, and an invalid key in the filter object voids the whole filter
+rather than erroring - which returns the unfiltered list and looks like a result.
+
+**The monthly "who is hiring" thread on a large developer forum.** Low yield and
+worth keeping anyway, because it costs about fifteen minutes once a month. A
+thread of 269 job posts contained fifteen mentioning the target region and two
+product roles, both of which declined on a published band and a location. **That
+is still a return**: two lanes priced at no cost, from postings written as free
+text by the hiring company rather than filtered through a taxonomy. Read it with a
+browser and filter the top-level posts; do not try to fetch it as a page.
+
 ## Record the dead ends too
 
 Negative findings save more time than positive ones, and they get re-derived
@@ -334,6 +427,17 @@ structurally empty is a finding, not a run of bad luck - say which one it is.
 - **Signed-in sources persist.** Sources needing a login are worth the one-time
   setup; the session usually lasts, and they surface roles that appear nowhere
   else.
+- **A role can be live and absent from the employer's own public board.** An
+  unlisted requisition is reachable only by direct link, which is how it arrives:
+  a paid advertisement, a recruiter's message, a referral. Do not treat absence
+  from the board as evidence the role is gone when the link itself still renders
+  a posting. It also means the company is spending money to source it, which is
+  worth knowing.
+- **The URL slug can carry a stale internal title.** One requisition was reachable
+  at a slug naming an internal grade while the page it served carried a different,
+  external-facing title - the same job id, two names, three weeks apart. Score and
+  write against the rendered page, never the slug, and when a title in a link
+  disagrees with the title on the page, the page wins.
 
 ## Record what each source is producing
 

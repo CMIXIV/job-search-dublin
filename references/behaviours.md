@@ -116,6 +116,35 @@ overwritten teaches nobody anything, including you the next time. Say it in the
 row: *"this score is a correction - the sweep called it the strongest fit on the
 title; reading the description contradicts that."* See `07-fit-scoring.md`.
 
+## Re-check a recorded gap with the person before it hardens into a filter
+
+A gap in someone's evidence - "has not managed people", "no experience with X" -
+gets written down once, usually early, often inferred from a CV rather than asked.
+Then it propagates. It shapes which roles get scored, which get declined, what the
+honest paragraph in a cover letter says, and what the person says out loud in an
+interview.
+
+In the search this skill was built from, one such line said the person's last
+experience of managing anyone was thirteen years earlier. It sat in three files,
+set the target level for the whole search, and was used to build the leadership
+answer in a process that ran to three rounds. It was wrong. **The person corrected
+it in a single sentence, unprompted, in month two:** they had led a team for three
+years in their most recent product role. The record had been built from what the
+CV happened to say, and the CV did not say it.
+
+**So: anything in the gaps list that came from inference rather than from the
+person directly is worth one question.** Ask it early, ask it plainly - "the record
+says you have not managed people; is that right?" - and ask again when a gap is
+about to be written into a document or an interview answer.
+
+Two things this does not license. **Do not solve a gap by assuming it away**: when
+the corrected fact is narrower than the role needs, say what it actually is and
+what it is not. In the example above, the person had led designers and delivery
+managers and had still never managed product managers, and both halves went into
+the letter. And **do not quietly rewrite history**: log the correction as a
+correction, leave the old wording visible where it records what was said in a live
+process, and say plainly which documents were built on the wrong version.
+
 ## Dates and weekdays are computed, not recalled
 
 A session's idea of "today" goes stale, and it went stale twice in two days -
