@@ -19,11 +19,13 @@ Two kinds of fixture:
     exists. These test real network behaviour: a real single-record lookup,
     a real listing, a real wrong-token 404.
 
-  - LOCAL fixtures (assertions 4, 6-12) are recorded payloads, not live
+  - LOCAL fixtures (assertions 4, 6-15) are recorded payloads, not live
     calls. They exist to pin down structural cases - a truncated listing, a
     summarising read, a partial Ashby board, an emitter that closes
-    everything, a location twin, an evergreen requisition id - that a live
-    public board cannot be relied on to keep reproducing on demand.
+    everything, a location twin, an evergreen requisition id, a country past
+    the cut of a truncated location string, a pay tier that clears where the
+    summary range does not - that a live public board cannot be relied on to
+    keep reproducing on demand. Their figures are invented.
 
 A note on how the real reads are meant to be made, because it is the thing
 these fixtures are protecting. A board listing settles liveness only when it
@@ -179,6 +181,65 @@ def location_verdict(tag_city, body_city, twin_count):
     if twin_count > 1:
         return "UNVERIFIED"
     return "LIVE"
+
+
+REGION_ONLY = ("europe", "emea", "remote - europe", "remote-europe", "remote, europe")
+
+
+def all_locations(posting, platform):
+    """10-verification.md, read the location list in full: every location the
+    ATS publishes for a posting, untruncated. Slicing is for display only."""
+    if platform == "ashby":
+        locs = [posting.get("location")]
+        locs += [s.get("location") for s in posting.get("secondaryLocations") or []]
+        tiers = (posting.get("compensation") or {}).get("compensationTiers") or []
+        locs += [t.get("title") for t in tiers]
+    elif platform == "greenhouse":
+        locs = [(posting.get("location") or {}).get("name")]
+        locs += [o.get("name") for o in posting.get("offices") or []]
+    elif platform == "lever":
+        cats = posting.get("categories") or {}
+        locs = [cats.get("location")] + list(cats.get("allLocations") or [])
+    elif platform == "workday":
+        info = posting.get("jobPostingInfo") or posting
+        locs = [info.get("location")] + list(info.get("additionalLocations") or [])
+    else:
+        raise ValueError(f"unknown platform {platform!r}")
+    return [l for l in locs if l]
+
+
+def country_eligibility(posting, platform, needles):
+    """ELIGIBLE on any match across the full list; UNVERIFIED where the only
+    location is a region with no country list; NOT ELIGIBLE otherwise."""
+    locs = all_locations(posting, platform)
+    wanted = [n.lower() for n in needles]
+    if any(n in l.lower() for l in locs for n in wanted):
+        return "ELIGIBLE"
+    if not locs or all(l.strip().lower() in REGION_ONLY for l in locs):
+        return "UNVERIFIED"
+    return "NOT ELIGIBLE"
+
+
+def country_pay(posting, country, floor):
+    """07-fit-scoring.md, per-country tiers: where tiers are published the floor
+    is tested against the tier for the person's country, never the summary.
+    Returns (verdict, (low, high) or None)."""
+    tiers = (posting.get("compensation") or {}).get("compensationTiers") or []
+    if not tiers:
+        return "NO TIERS", None
+    for t in tiers:
+        if country.lower() in (t.get("title") or "").lower():
+            salary = [c for c in t.get("components") or []
+                      if c.get("compensationType") == "Salary"]
+            if not salary:
+                return "UNKNOWN", None
+            low, high = salary[0]["minValue"], salary[0]["maxValue"]
+            if low >= floor:
+                return "CLEARS", (low, high)
+            if high < floor:
+                return "BELOW", (low, high)
+            return "STRADDLES", (low, high)
+    return "UNKNOWN", None
 
 
 def verdict_with_tiers(tier_a_verdict, tier_b_claims_closed, source_history):
@@ -377,11 +438,74 @@ def run():
         f"{evergreen_role['probability']}.",
     )
 
+    # The shape of the Ashby incident, with invented figures: the person's country is the last
+    # of 28 locations, past the point where a joined string was cut.
+    countries = ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia",
+                 "Denmark", "Estonia", "Finland", "France", "Germany", "Greece",
+                 "Hungary", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta",
+                 "Netherlands", "Norway", "Poland", "Romania", "Slovakia",
+                 "Slovenia", "Spain", "Sweden", "Switzerland", "Portugal"]
+    ashby_posting = {
+        "location": "Remote - Europe",
+        "secondaryLocations": [{"location": c} for c in countries],
+        "compensation": {
+            "compensationTierSummary": "€80K – €150K",
+            "compensationTiers": [
+                {"title": "Tier 2 - Eastern Europe",
+                 "components": [{"compensationType": "Salary",
+                                 "minValue": 80000, "maxValue": 110000}]},
+                {"title": "Tier 1 - Portugal, Netherlands",
+                 "components": [{"compensationType": "Salary",
+                                 "minValue": 125000, "maxValue": 150000}]},
+            ],
+        },
+    }
+    joined = ", ".join(all_locations(ashby_posting, "ashby"))
+    truncated_hit = "portugal" in joined[:100].lower()
+    full_hit = country_eligibility(ashby_posting, "ashby", ["Portugal"])
+    check(
+        "13. a country past the 100th character of the location list is still "
+        "matched (truncation regression)",
+        "10-verification.md, read the location list in full",
+        not truncated_hit and full_hit == "ELIGIBLE",
+        f"country_eligibility(...) = {full_hit!r}, expected ELIGIBLE. The "
+        f"fixture's country sits at character {joined.lower().find('portugal')} of "
+        f"{len(joined)}; if truncated_hit ({truncated_hit!r}) is True the "
+        "fixture no longer exercises the cut - lengthen it, do not drop the check.",
+    )
+
+    gh_posting = {"location": {"name": "Berlin"},
+                  "offices": [{"name": "Berlin"}, {"name": "Lisbon"}]}
+    gh_hit = country_eligibility(gh_posting, "greenhouse", ["Portugal", "Lisbon"])
+    region_only = country_eligibility({"location": "Remote - Europe"}, "ashby",
+                                      ["Portugal"])
+    check(
+        "14. a Greenhouse office past location.name clears, and a region with no "
+        "country list is UNVERIFIED, never NOT ELIGIBLE",
+        "10-verification.md, read the location list in full",
+        gh_hit == "ELIGIBLE" and region_only == "UNVERIFIED",
+        f"greenhouse offices[] = {gh_hit!r} (want ELIGIBLE); "
+        f"region only = {region_only!r} (want UNVERIFIED).",
+    )
+
+    pay, band = country_pay(ashby_posting, "Portugal", floor=115000)
+    no_tier, _ = country_pay(ashby_posting, "Ireland", floor=115000)
+    check(
+        "15. the floor is tested against the country tier, not the summary "
+        "range, and a missing country tier is UNKNOWN",
+        "07-fit-scoring.md, per-country tiers",
+        pay == "CLEARS" and band == (125000, 150000) and no_tier == "UNKNOWN",
+        f"country_pay(Portugal) = {pay!r} {band!r} (want CLEARS (125000, 150000)); "
+        f"country_pay(no tier) = {no_tier!r} (want UNKNOWN). The summary's "
+        "bottom is under the floor; it must not decide the verdict.",
+    )
+
+    total = 15
     print()
     if FAILURES:
-        print(f"{len(FAILURES)} of 12 checks failed: {', '.join(FAILURES)}")
+        print(f"{len(FAILURES)} of {total} checks failed: {', '.join(FAILURES)}")
         return 1
-    print("12 of 12 checks passed.")
+    print(f"{total} of {total} checks passed.")
     return 0
 
 
