@@ -438,8 +438,8 @@ def run():
         f"{evergreen_role['probability']}.",
     )
 
-    # The shape of the Ashby incident, with invented figures: the person's country is the last
-    # of 28 locations, past the point where a joined string was cut.
+    # The shape of the Ashby incident, with invented figures: the person's
+    # country is the last of 28 locations, past where a joined string was cut.
     countries = ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia",
                  "Denmark", "Estonia", "Finland", "France", "Germany", "Greece",
                  "Hungary", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta",
@@ -489,7 +489,7 @@ def run():
     )
 
     pay, band = country_pay(ashby_posting, "Portugal", floor=115000)
-    no_tier, _ = country_pay(ashby_posting, "Ireland", floor=115000)
+    no_tier, _ = country_pay(ashby_posting, "Spain", floor=115000)
     check(
         "15. the floor is tested against the country tier, not the summary "
         "range, and a missing country tier is UNKNOWN",
