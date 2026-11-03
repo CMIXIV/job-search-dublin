@@ -3,6 +3,43 @@
 Dates are release-tag dates. Each entry is a summary of the tagged commit;
 see git history for the full message.
 
+## v1.7.0 - 2026-11-03
+
+Method-fixes release: eight lessons from one sweep, each a place where
+the read was right and the reading of it was not. The most important is
+in `10-verification.md`: **read the location list in full before
+matching.** Three Senior PM reqs on one Ashby board listed the person's
+country among 27-29 locations, each with a published pay tier for that
+country above their floor. For twelve days the sweep filed them as
+"Europe-only", because it joined the locations into one string and cut
+it at about 100 characters before looking for the country. A Greenhouse
+re-check found the same blind spot in `offices[]`. Eligibility is now
+any match across the full list per platform - Ashby secondary locations
+and country pay tiers, Greenhouse offices, Lever `allLocations`, Workday
+`additionalLocations` - and a region with no country list is
+UNVERIFIED, never ineligible.
+
+Adds to `07-fit-scoring.md`: where an ATS publishes per-country tiers,
+the floor is tested against the person's country tier; the summary range
+is never evidence on its own. Adds to `06-cadence-autonomy.md`: a seen
+id is not a screened id - the daily diff had marked the same three reqs
+known from their first appearance, so a verdict is now kept per id - and
+an optional afternoon delta, offered rather than scheduled, after a
+strong req posted an hour after the morning sweep. Adds to
+`10-verification.md`: a live process's req leaving the board is neither
+a rejection nor an offer and changes neither score nor chase plan; and a
+change-detection hash is stored with the method that made it. Adds to
+`04-sources.md`: repeating paged results are a depth limit, so count
+unique ids and state the stop rule; and a shrinking filtered Workday
+count is checked against the board's own facets before a filter is
+called incomplete.
+
+`scripts/verify_check.py` gains three local fixtures - a country past
+the 100th character of a 28-location list, a Greenhouse office beyond
+`location.name` with a region-only posting kept UNVERIFIED, and a
+country tier clearing where the summary does not - and a replacement
+live fixture id after the recorded one closed.
+
 ## v1.6.0 - 2026-09-14
 
 Sourcing-breadth release, plus one behaviour that is the most important
