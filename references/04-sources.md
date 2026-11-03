@@ -214,6 +214,12 @@ The practical answer is per-employer email alerts. Pick the employers that matte
 - for most people that is five to ten - and set a job alert on each tenant. Free,
 reliable, and better than anything you could build for that number of companies.
 
+**A shrinking filtered count is checked against the board's own facets.** A
+city-filtered count on one tenant fell from 59 to 37 in four days and looked
+like a missing location facet. Listing the facet values and counts the board
+itself returned showed every one was already in the filter: the board was
+shrinking. Before calling a filter incomplete, list the board's facets.
+
 **Ashby, Lever, Greenhouse boards, Personio, SmartRecruiters.** Same pattern:
 find the target employer's board, apply there, set an alert if offered.
 
@@ -445,6 +451,11 @@ structurally empty is a finding, not a run of bad luck - say which one it is.
   external-facing title - the same job id, two names, three weeks apart. Score and
   write against the rendered page, never the slug, and when a title in a link
   disagrees with the title on the page, the page wins.
+- **Paged results that repeat are a depth limit, not an empty market.** One
+  aggregator returned 217 unique roles one day and 333 a week earlier from the
+  same queries, because pages past the last one repeat earlier rows and the two
+  runs stopped on different rules. Count unique ids, state the stop rule in the
+  report, and compare with the previous run before calling a source thin.
 
 ## Record what each source is producing
 
