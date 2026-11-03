@@ -57,7 +57,7 @@ import urllib.request
 TIMEOUT = 15
 
 BOARD_TOKEN = "greenhouse"           # Greenhouse's own careers board
-LIVE_JOB_ID = 8072927                # confirmed open at recording time
+LIVE_JOB_ID = 6180015                # confirmed open at recording time
 DEAD_JOB_ID = 1                      # permanently invalid - ids are large auto-increments
 WRONG_TOKEN = "this-token-does-not-exist-zzz"
 
