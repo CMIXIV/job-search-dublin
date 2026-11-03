@@ -239,6 +239,32 @@ location tag clear a location filter on its own where the description body names
 a different city. The twins also matter to scoring - see the application-farming
 note in `07-fit-scoring.md`.
 
+**Read the location list in full; never truncate it before matching.** Three
+Senior PM reqs on one Ashby board listed the person's country among 27-29
+locations, each with a published pay tier for that country above their floor.
+For twelve days a sweep filed them as "Europe-only, no local location named",
+because it joined the locations into one string and cut it at about 100
+characters before looking for the country. A Greenhouse re-check found the same
+blind spot from the other side: a req whose `location.name` named one city and
+whose `offices[]` included the person's, never screened.
+
+Country eligibility is **any match across the whole list**:
+
+- **Ashby** - `location`, every `secondaryLocations[].location`, and any
+  `compensation.compensationTiers[]` entry titled with the country (requested
+  with `?includeCompensation=true`)
+- **Greenhouse** - `location.name` and every `offices[]` entry. `offices` comes
+  only with `/jobs?content=true` or the single-job endpoint, so a
+  `?content=false` read cannot clear or fail a location - follow it with the
+  single-job read
+- **Lever** - `categories.allLocations`, not just `categories.location`
+- **Workday** - the detail record's `additionalLocations` as well as the
+  primary location
+
+Slicing is for display only. And **"Europe", "EMEA" or "Remote - Europe" with no
+country list is UNVERIFIED, never "not eligible"** - it is a first-call question,
+the same as an unpublished band.
+
 ## The escalation ladder - cheapest first
 
 Stop at the first tier that settles it, and log which one did.
@@ -296,7 +322,8 @@ piece. Confirm the real token before using any of these - see above.
   `boards-api.greenhouse.io/v1/boards/<token>/jobs/<job_id>` (GET). Listing:
   `boards-api.greenhouse.io/v1/boards/<token>/jobs?content=true` (GET).
 - **Ashby** - listing (job detail is embedded in it):
-  `api.ashbyhq.com/posting-api/job-board/<token>` (GET).
+  `api.ashbyhq.com/posting-api/job-board/<token>?includeCompensation=true`
+  (GET). Without the parameter the per-country pay tiers are not returned.
 - **Lever** - single record:
   `api.lever.co/v0/postings/<token>/<posting_id>?mode=json` (GET). Listing:
   `api.lever.co/v0/postings/<token>?mode=json` (GET).

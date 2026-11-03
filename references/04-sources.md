@@ -217,6 +217,13 @@ reliable, and better than anything you could build for that number of companies.
 **Ashby, Lever, Greenhouse boards, Personio, SmartRecruiters.** Same pattern:
 find the target employer's board, apply there, set an alert if offered.
 
+When reading any of them through the API, **match location against the full
+list** - Ashby's `secondaryLocations`, Greenhouse's `offices[]`, Lever's
+`allLocations`, Workday's `additionalLocations` - never a truncated join of it.
+A cut at about 100 characters hid the person's country on three reqs for twelve
+days. The field list per platform is in "Location tags are claims, not facts"
+in `10-verification.md`.
+
 ### The ATS you have not heard of is where the locally-founded companies are
 
 A sweep built on Greenhouse and Ashby alone is not lightly biased. It is
