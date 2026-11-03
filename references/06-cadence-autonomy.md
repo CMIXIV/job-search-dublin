@@ -38,6 +38,15 @@ See `04-sources.md`. The secondary keyword searches are where off-target noise
 now accumulates, so run them as optional, and triage them against the archive and
 the employer-name test before opening anything.
 
+**Offer a same-day delta, and ask before scheduling it.** A strong req was
+published about an hour after the morning sweep and reached the person through
+their own browsing first. The next morning's sweep would have caught it, but a
+day matters early in a process. So describe an optional afternoon delta - the
+ATS APIs filtered to postings published since the morning run, plus new ids on
+the local job board, about ten to fifteen minutes - and ask whether they want it
+on request or on a schedule. Some people would rather be asked in the afternoon
+than receive another scheduled task; that is a fine answer, and it is theirs.
+
 **Warn about the volume trap.** Response rates for cold applications are low
 everywhere, so people rationally increase volume - and volume degrades tailoring,
 which lowers the response rate further. The escape is not more applications; it
@@ -175,6 +184,13 @@ purpose.
 sometimes fire twice in a day, and a second pass will happily re-surface roles
 already logged. Match new finds against what is already in the tracker before
 reporting them, or the pipeline inflates with duplicates of itself.
+
+**A seen id is not a screened id.** A daily id diff against a job board marked
+three reqs as "known" from their first appearance, so after one wrong location
+verdict they were never screened again. Keep **a verdict per id** - LIVE, GONE
+or UNVERIFIED, plus passed, the person's call, or clears - not just a list of
+ids seen. An id with no verdict is screened at the next sweep, and an
+UNVERIFIED one is re-checked rather than carried as known.
 
 Make pausing trivial and say so when setting it up.
 
