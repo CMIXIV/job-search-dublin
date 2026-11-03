@@ -170,6 +170,13 @@ a board that is entirely down is not a dead requisition. It is an outage, and
 an outage looks identical to a closure from the far end of a single failed
 request.
 
+**A live process's req coming off the board is not a verdict on the process.**
+The req for the person's most advanced process disappeared from the employer's
+ATS the day before the decision was due, with a same-team req still live as the
+control. Report it plainly, name the control, and say it is neither a rejection
+nor an offer - hires close reqs, and so do paused budgets and internal moves. Do
+not change the score or the chase plan because of it.
+
 ## An empty board means a wrong token, not a dead employer
 
 If a board endpoint returns zero records, the default explanation is an
@@ -312,6 +319,13 @@ control used for a GONE, and the date. A verdict without provenance cannot be
 re-audited, and this is exactly the kind of thing that does need re-auditing -
 this file exists because a prior run's verdicts were wrong and nobody could
 tell which ones without redoing the work from scratch.
+
+**Record how a change-detection hash was made.** A stored 16-character hash of a
+government page could not be reproduced on a later run, because nobody had
+written down which text was hashed or how - so a real change and a different
+hashing method looked the same. Store the method with the hash: which element,
+which algorithm, how many characters went in. Or keep a verbatim copy and
+compare paragraphs against it, which also says what changed.
 
 ## Generic endpoint patterns
 
