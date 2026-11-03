@@ -77,6 +77,12 @@ it, check the axis before adjusting the number.
 - **Employment through an employer of record** is employment - but it is a
   first-call question wherever the person's right to work depends on continuity
   with a direct employer.
+- **Per-country tiers** are the band; the summary range is not. An Ashby
+  summary whose bottom sat well under the person's floor looked like a fail;
+  the tier for their country started above the floor. **Where an ATS publishes
+  per-country or per-region tiers, test the floor against the tier for the
+  person's country.** The summary range is never evidence on its own, and
+  tiers with none for their country mean the band is unknown, not failed.
 
 **A new filter is scoped against every open row before it is applied.** The
 first wording of one location filter, read literally, would have closed ten rows
